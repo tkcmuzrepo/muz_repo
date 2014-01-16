@@ -32,7 +32,7 @@ class BlobLog{
 		$before_date=strtotime("- {$this->rotate} day",time());
 		foreach($blobs as $k=>$v){
 			if(strtotime($v->lastmodified) >= $before_date) continue;
-			$instance->blob_remove($v->container,$v->name);
+			$this->instance->blob_remove($v->container,$v->name);
 		}
 		return true;
 	}
