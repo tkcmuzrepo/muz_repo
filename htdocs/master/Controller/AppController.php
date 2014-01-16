@@ -123,9 +123,11 @@ class AppController extends Controller {
 			
 			Configure::write('Security.level','low');
 			
+			/*
 			v(class_exists('Collator'),1);
 			echo phpinfo();
 			exit;
+			*/
 			
 			# basic認証
 			basic_auth(MASTER_BASIC_ID,MASTER_BASIC_PASS);
