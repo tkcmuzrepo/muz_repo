@@ -1,6 +1,6 @@
 <?php
 
-set_include_path(get_include_path().";".CLASS_DIR);
+//set_include_path(get_include_path().";".CLASS_DIR);
 date_default_timezone_set('Asia/Tokyo');
 
 ini_set("memory_limit", -1);
