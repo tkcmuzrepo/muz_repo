@@ -1,0 +1,3 @@
+none	制限なし
+validate_number	数値のみ
+validate_alpha	アルファベットのみ

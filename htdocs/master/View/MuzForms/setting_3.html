@@ -1,0 +1,463 @@
+
+
+<div id="main">
+
+<?php echo $this->element('form_navi'); ?>
+
+<div id="main_inner">
+
+<!--
+date_key=値
+共通でサーバに送信して下さい 
+-->
+<?php echo $this->Form->hidden('MuzFormFieldSetting.dateKey',array('value'=>$date_key,'class'=>'date_key')); ?>
+
+<div id="main_inner_left">
+	<div id="usedform">
+  	<h1>現在使用中のフィールド</h1>
+	
+	<!-- グループアイテム -->
+	<?php $group_array=(!isset($enable_use_fields))?array():$enable_use_fields; ?>
+	
+	<?php foreach($group_list as $k=>$v){ ?>
+	<?php $group_id=$v['MuzFormGroupSetting']['id']; ?>
+	
+	<div class="formgroup">
+	
+	<div class="hidden_value">
+		<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
+	</div>
+	
+	<div class="groupup">▲</div>
+	<div class="groupdown">▼</div>
+	<h1><?php echo $v['MuzFormGroupSetting']['group_title']; ?></h1>
+	<div class="formlist">
+		
+		<?php if(!isset($enable_use_fields[$group_id])) continue; ?>
+		<?php $fields=$enable_use_fields[$group_id]; ?>
+		
+		<?php foreach($fields as $field_id=>$_v){ ?>
+		<?php $isTextField=($_v['type']=='text'); ?>
+		<?php $isPreset=!empty($_v['preset_id'])?true:false; ?>
+		<!-- フィールドアイテム -->		
+
+<div class="formlistitem">
+	
+	<!-- このクラスの子要素のhiddenの値をとる -->
+	<div class="hidden_value">
+		<?php echo $this->Form->hidden("MuzFormFieldSetting.id.{$_v['field_id']}",array('value'=>$_v['field_id'],'class'=>'field_id')); ?>
+	</div>
+	
+	<?php $className=(!empty($_v['preset_id']))?'presetitme':''; ?>
+	<div class="formlistitemtitle presetitme"><?php echo $_v['title']; ?></div>
+		<div class="togle">▼</div>
+		<div class="formedit">
+			<div class="formeditleft">
+			<h2>フィールドのタイトル</h2>
+				
+				<!-- title=値 -->
+				<?php echo $this->Form->text("MuzFormFieldSetting.title",array('class'=>'inputtext','value'=>$_v['title'])); ?>
+		 	    
+				<?php if($isTextField AND !$isPreset){ ?>
+				<div class="switcheditshow_1">
+					<h2>最大文字数</h2>
+					<!-- max_num=値 -->
+					<?php $max_num=empty($_v['max_num'])?'':$_v['max_num']; ?>
+			        <?php echo $this->Form->text("MuzFormFieldSettingDetail.max_num",array('class'=>'inputtext editnumbert','value'=>$max_num)); ?>
+				</div>
+		        <?php } ?>
+				
+				<?php $isDisplayView=(!$isPreset AND isset($_v['values']) AND !empty($_v['values'])); ?>
+				<div class="switcheditshow_2" style="display:<?php echo ($isDisplayView?'block':'none'); ?>;">
+					<h2>入力項目</h2>
+					<ul class="formtypeselect multinput_edit">
+					<?php foreach($_v['values'] as $k=>$v){ ?>
+					<li>
+					<span class="multinputremove">×</span>
+					<?php echo $this->Form->text("MuzFormValueSetting.value.{$v['id']}",array("value"=>$v['value']))?>
+					</li>
+					<?php } ?>
+					</ul>
+				</div>
+				
+				<h2>補足文</h2>
+				
+				<!-- sub_title=値 -->
+				<?php echo $this->Form->textarea("MuzFormFieldSetting.sub_title",array('cols'=>40,'rows'=>4,'class'=>'inputtextarea','value'=>$_v['sub_title']));?>
+				<h2>表示の設定</h2>
+				<p>
+				
+				<!-- view_flg=値 -->
+				<?php $isView=!empty($_v['view_flg']); ?>
+				<?php echo $this->Form->checkbox("MuzFormFieldSetting.view_flg",array('class'=>'checkboxhtml','checked'=>$isView))?>この項目を表示する</a>
+		</div>
+		<div class="formeditright">
+			<div class="fieldeditsubmit">変更する</div>
+		</div>
+	</div>
+</div>
+		<?php } ?>
+	</div>
+	</div>
+	<?php } ?>
+  </div>
+  <input id="newgroupsubmit" val="newgroupsubmit" >
+</div>
+
+
+<div id="main_inner_right">
+
+<div id="makedinput">
+<h1>使用可能なフィールド</h1>
+<div class="formlist">
+
+<?php
+	
+	# グループに属していないフィールド
+	# そもそも使用されていないフィールド
+?>
+
+<?php $field_ary=(!isset($enable_no_use_fields))?array():$enable_no_use_fields; ?>
+<?php foreach($field_ary as $k=>$v){ ?>
+
+<?php $isTextField=in_array($this->Muzform->getFiledType($v['type']),array('text','textarea')); ?>
+<?php $isPreset=!empty($v['preset_id'])?true:false; ?>
+
+<!-- デフォルトアイテム -->
+<div class="formlistitem">
+	
+	<!-- このクラスの子要素のhiddenの値をとる -->
+	<div class="hidden_value">
+	<?php echo $this->Form->hidden("MuzFormFieldSetting.id.{$v['field_id']}",array('value'=>$v['field_id'],'class'=>'field_id')); ?>
+	<?php echo $this->Form->hidden("MuzFormFieldSetting.sort_number.{$v['field_id']}",array('value'=>$v['sort_number'],'class'=>'sort_number'));?>
+	</div>
+	
+	<!-- フィールド -->
+	<?php $className=(!empty($v['preset_id']))?'presetitme':''; ?>
+	<div class="formlistitemtitle <?php echo $className; ?>"><?php echo $v['title'];?></div>
+	
+	<div class="togle">▼</div>
+		<div class="formedit">
+		<div class="formeditleft">
+		<h2>フィールドのタイトル</h2>
+		
+		 <!-- title=値 -->
+		 <?php echo $this->Form->text("MuzFormField.title",array('class'=>'inputtext','value'=>$v['title'])); ?>
+		 	
+			<?php if($isTextField AND !$isPreset){ ?>
+			<div class="switcheditshow_1">
+		 		<!-- max_num=値 -->
+				<h2>最大文字数</h2>
+				<?php $max_num=empty($v['max_num'])?'':$v['max_num']; ?>
+		        <?php echo $this->Form->text("MuzFormFieldSettingDetail.max_num",array('class'=>'inputtext editnumbert','value'=>$max_num)); ?>
+			</div>
+			<?php } ?>
+			
+			<?php $isDisplayView=(!$isPreset AND isset($_v['values']) AND !empty($_v['values'])); ?>
+			<div class="switcheditshow_2" style="display:<?php echo ($isDisplayView?'block':'none'); ?>;">
+				<h2>入力項目</h2>
+				<ul class="formtypeselect multinput_edit">
+				<?php foreach($_v['values'] as $k=>$v){ ?>
+				<li>
+				<span class="multinputremove">×</span>
+				<?php echo $this->Form->text("MuzFormValueSetting.value.{$v['id']}",array("value"=>$v['value']))?>
+				</li>
+				<?php } ?>
+				</ul>
+			</div>
+			
+			<h2>補足文</h2>
+		 	<!-- sub_title=値 -->
+		 	<?php echo $this->Form->textarea("MuzFormFieldSetting.sub_title",array('cols'=>40,'rows'=>4,'class'=>'inputtextarea','value'=>$_v['sub_title']));?>
+		</div>
+		<div class="formeditright">
+			<div class="fieldeditsubmit">変更する</div>
+		</div>
+	</div>
+</div>
+<!-- /デフォルトアイテム -->
+<?php } ?>
+</div>
+</div>
+
+<!-- //////////////////////////////////////////////// -->
+
+<div id="newinput">
+<h1>フィールドの新規作成</h1>
+
+<!-- title=値 -->
+<h2>フィールドのタイトル</h2>
+<?php echo $this->Form->text("MuzFormFieldSetting.title",array('id'=>'inputtext','placeholder'=>'フィールドのタイトル')); ?>
+
+
+<!--
+	
+	field_type=値
+	
+	※値
+	テキスト入力 => text
+	プルダウン   => select
+	ラジオボタン => radio
+	チェックボックス => checkbox
+	テキストボックス => textarea
+	
+-->
+
+<h2>フォームの種類</h2>
+<ul class="newformul modeselecrradio">
+<li><input type="radio" name="data[MuzFormFieldSetting][type]" value="text" class="" checked>テキスト入力</li>
+<li><input type="radio" name="data[MuzFormFieldSetting][type]" value="select">プルダウン</li>
+<li><input type="radio" name="data[MuzFormFieldSetting][type]" value="radio">ラジオボタン</li>
+<li><input type="radio" name="data[MuzFormFieldSetting][type]" value="checkbox">チェックボックス</li>
+<li><input type="radio" name="data[MuzFormFieldSetting][type]" value="textarea">テキストボックス</li>
+</ul>
+
+
+<div class="switcheditshow_new_1">
+  <ul class="formtypeselecttext">
+  <h2>最大文字数</h2>
+  <ul class="newformul">
+  <li>
+  
+  <!-- max_num=値 -->
+  <?php echo $this->Form->text("MuzFormFieldSettingDetail.max_num",array('class'=>'max_num','value'=>20,'id'=>'textnumber')); ?>
+  
+  </li>
+  </ul>
+  <h2>入力の制限</h2>
+  <ul class="newformul">
+  <li>
+  	
+	<?php
+		$selectValues['']='制限なし';
+		$selectValues['validate_number']='数字のみ';
+		$selectValues['validate_alpha']='アルファベットのみ';
+	?>
+	<?php echo $this->Form->select("MuzFormFieldSetting.validate_type",$selectValues,array('empty'=>false,'class'=>'newinputvalidation')); ?>
+	
+  </li>
+  </ul>
+</div>
+
+<div class="switcheditshow_new_2" style="display:none">
+  <ul class="formtypeselecttext">
+  <h2>入力項目</h2>
+  <ul class="newformul multinput">
+  <!-- value=値1 -->
+  <!-- value=値2 -->
+  <!-- value=値3 -->
+  <li><?php echo $this->Form->text("MuzFormFieldValue.value"); ?></li>
+  <li><?php echo $this->Form->text("MuzFormFieldValue.value"); ?></li>
+  </ul>
+</div>
+
+<h2>補足文</h2>
+
+<!-- sub_title=値 -->
+<?php echo $this->Form->textarea("MuzFormFieldSetting.sub_title",array('id'=>'inputtextarea','cols'=>40,'rows'=>4,'class'=>'inputtextarea','placeholder'=>'補足文'));?>
+
+<h2>必須項目の設定</h2>
+
+<p>
+<!-- required_flg=値 -->
+<?php echo $this->Form->checkbox('MuzFormFieldSetting.required_flg',array('checked'=>false,'class'=>'checkboxhtml','id'=>'requiredcheckbox'))?>必須項目に設定する
+</p>
+
+<h2>表示の設定</h2>
+<p>
+<!-- view_flg=値 -->
+<?php echo $this->Form->checkbox('MuzFormFieldSetting.view_flg',array('checked'=>false,'class'=>'checkboxhtml','id'=>'viewflagchkbox'))?>この項目表示する
+</p>
+
+<div id="makenewinput">フィールドを作成する</div>
+</div>
+
+<!-- //////////////////////////////////////////////// -->
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- template -->
+<script id="template" type="text/x-jquery-tmpl">
+
+<div class="formlistitem" id="${formid}">
+
+<div class="formlistitemtitle"> 
+${inputtext}${inputtextarea}
+</div>
+
+
+<div class="togle">▼</div>
+<div class="formedit">
+
+
+
+
+
+
+  <div class="formeditleft">
+
+  <h2>フォームのタイトルさsa</h2>
+   <input type="text" class="inputtext" value="${inputtext}">
+
+
+
+
+    
+        {{if formtype == 'テキスト入力'}}
+         <div class="switcheditshow_1">
+        {{else}} 
+          <div class="switcheditshow_1" style="display:none">
+        {{/if}}
+
+        <h2>最大文字数</h2>
+        <input type="text" class="inputtext editnumbert" value="${textnumber}">
+
+        </div>
+
+
+
+
+
+    {{if formtype == 'テキスト入力'}}
+      <div class="switcheditshow_2" style="display:none">    
+    {{else}} 
+           {{if formtypenumber > 3}}
+              <div class="switcheditshow_2">
+          {{else}}
+              <div class="switcheditshow_2" style="display:none">    
+          {{/if}}
+
+    {{/if}}
+
+
+    <h2>入力項目</h2>
+    <ul class="formtypeselect multinput_edit">
+       {{each multinput}}
+         <li><span class="multinputremove">×</span><input type="text" name="" value="${this}"></li>
+        {{/each}}
+        <li><span class="multinputremove">×</span><input type="text" name="" value=""></li>
+    </ul>
+    </div>
+
+
+    <h2>補足文</h2>
+    <textarea cols=40 rows=4 class="inputtextarea">${inputtextarea}</textarea>
+
+
+    <h2>必須項目の設定</h2>
+        {{if requiredchk == 'required'}}
+          <p><input type="checkbox" name="requiredchk" value="required" checked>必須項目</p>
+        {{else}} 
+         <p><input type="checkbox" name="requiredchk" value="required">必須項目</p>
+      {{/if}}
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+  <div class="formeditright">
+
+
+  <h2>フォームの種類</h2>
+  <ul class="formtypeselect witcheditmode">
+
+    {{if formtype == 'テキスト入力'}}
+      <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="テキスト入力" checked>テキスト入力</li>
+      {{else}} 
+      <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="テキスト入力">テキスト入力</li>
+    {{/if}}
+  
+    {{if formtype == 'プルダウン'}}
+        <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="プルダウン" checked>プルダウン</li>
+          {{else}} 
+            <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="プルダウン">プルダウン</li>
+    {{/if}}
+
+    {{if formtype == 'ラジオボタン'}}
+        <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="ラジオボタン" checked>ラジオボタン</li>
+         {{else}} 
+        <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="ラジオボタン">ラジオボタン</li>
+    {{/if}}
+  
+    {{if formtype == 'チェックボックス'}}
+        <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="チェックボックス" checked>チェックボックス</li>
+      {{else}} 
+       <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="チェックボックス">チェックボックス</li>
+    {{/if}}
+
+
+
+  </ul>
+    <div class="editsubmit">変更する</div>
+  </div>
+</div>
+
+</div>
+
+
+
+</script>
+<!-- /template -->
+
+
+<!-- template -->
+<script id="multinputli" type="text/x-jquery-tmpl">
+<li><span class="multinputremove">×</span><input type="text" name="example" value=""></li>
+</script>
+<!-- /template -->
+
+
+<!-- template -->
+<script id="formtypeselectreset" type="text/x-jquery-tmpl">
+<li><input type="radio" name="radio" value="テキスト入力" checked>テキスト入力</li>
+<li><input type="radio" name="radio" value="プルダウン">プルダウン</li>
+<li><input type="radio" name="radio" value="ラジオボタン">ラジオボタン</li>
+<li><input type="radio" name="radio" value="チェックボックス">チェックボックス</li>
+</script>
+<!-- /template -->
+
+
+<!-- template -->
+<script id="multinputreset" type="text/x-jquery-tmpl">
+<li><input type="text" name="example" value=""></li>
+<li><input type="text" name="example" value=""></li>
+</script>
+<!-- /template -->
+
+
+<!-- template -->
+<script id="newgroup" type="text/x-jquery-tmpl">
+
+<div class="formgroup">
+<div class="groupup">△</div>
+<div class="groupdown">▽</div>
+<h1>newgroup</h1>
+<div class="formlist">
+</div>
+</div>
+
+</script>
+<!-- /template -->

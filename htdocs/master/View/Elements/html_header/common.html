@@ -1,0 +1,29 @@
+<div id="wrap">
+    <div id="header">
+      <div id="header_title">
+        <div id="header_title_inner">
+          <h1 id="logo"><img src="img/logo.png" alt="ミュゼプラチナム" /></h1>
+          <p><img src="img/headertitle.png" alt="ミュゼプラチナム" /></p>
+        </div>
+      </div>
+      <div id="header_inner">
+          <ul class="headerUl">
+            <li class="selected"><a href="muz_homes/">HOME</a></li>
+            <li><a href="muz_forms/">フォーム管理</a></li>
+            <li><a href="muz_users/">ユーザー管理</a></li>
+            <li id="headerUlEtc">
+              その他の設定
+              <ul class="headerUlAdvance">
+                <li><a href="muz_promotions/">広告コード管理</a></li>
+                <li><a href="muz_accounts/">ログイン情報管理</a></li>
+              </ul>
+            </li>
+            <li class="headerUlright">
+              <p><a href=""><img src="img/pdf.png" alt="操作マニュアル" /></a></p>
+              <p>
+			  <span class="headerUlgray">
+			  <?php echo $login_user['MuzMasterAccount']['name'];?>
+			  </span> でログイン中 | <a href="muz_homes/logout"><span class="headerUlgray">ログアウト</span></a></p></li>
+          </ul>
+      </div>
+    </div>

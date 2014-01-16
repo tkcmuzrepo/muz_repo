@@ -1,0 +1,362 @@
+<div id="main">
+<div id="main_inner">
+
+<div id="main_inner_left">
+	<div id="usedform">
+  	<h1>現在使用中のフィールド</h1>
+	
+	<!-- グループアイテム -->
+	<?php $group_array=(!isset($enable_use_fields))?array():$enable_use_fields; ?>
+	
+	<?php foreach($group_array as $group_id=>$v){ ?>
+	
+	<div class="formgroup">
+	<div class="groupup">▲</div>
+	<div class="groupdown">▼</div>
+	<h1>グループ<?php echo $group_id;?></h1>
+	<div class="formlist">
+		
+		<?php foreach($v as $field_id=>$_v){ ?>
+		<?php $isTextField=($_v['type']=='text'); ?>
+		
+		<!-- フィールドアイテム -->
+		<div class="formlistitem" id="demo1">
+		<div class="formlistitemtitle"><?php echo $_v['title']; ?></div>
+		<div class="togle">▼</div>
+		<div class="formedit">
+	    <div class="formeditleft">
+	      <h2>フォームのタイトル</h2>
+	      <input type="text" class="inputtext" value="<?php echo $_v['title']; ?>">
+		  
+		  <?php if(isDev($admin_level)){ ?>
+		  <?php echo "type:{$_v['type']}<br />"; ?>
+		  <?php echo "view_flg:{$_v['view_flg']}<br />";?>
+		  <?php echo "required_flg:{$_v['required_flg']}<br />";?>
+		  <?php echo "sort_number:{$_v['sort_number']}<br />";?>
+		  <?php } ?>
+		  
+		  <?php if($isTextField){ ?>
+	      <div class="switcheditshow_1">
+	        <h2>最大文字数</h2>
+	        <input type="text" class="inputtext editnumbert" value="20">
+	      </div>
+		  <?php } ?>
+		  
+	      <div class="switcheditshow_2" style="display:none">
+	        <h2>入力項目</h2>
+	        <ul class="formtypeselect multinput_edit">
+	          <li>
+	            <span class="multinputremove">×</span>
+	            <input type="text" name="" value="">
+	          </li>
+	        </ul>
+	      </div>
+	      <h2>補足文</h2>
+	      <textarea cols="40" rows="4" class="inputtextarea"><?php echo $_v['sub_title'];?></textarea>
+	    </div>
+		</div>
+		</div>
+		<?php } ?>
+	</div>
+	</div>
+	<?php } ?>
+  </div>
+  <input id="newgroupsubmit" val="newgroupsubmit" >
+</div>
+
+
+
+<div id="main_inner_right">
+
+<div id="makedinput">
+<h1>使用可能なフィールド</h1>
+<div class="formlist">
+
+<?php
+	
+	# グループに属していないフィールド
+	# そもそも使用されていないフィールド
+?>
+
+<?php $field_ary=(!isset($enable_no_use_fields))?array():$enable_no_use_fields; ?>
+<?php foreach($field_ary as $k=>$v){ ?>
+<?php $isTextField=($v['type']=='text'); ?>
+
+<!-- デフォルトアイテム -->
+<div class="formlistitem">
+	
+	<!-- フィールドID -->
+	<input type="hidden" value="<?php echo $v['field_id']; ?>" class="field_id">
+	
+	<!-- フィールド -->
+	<?php $className=(!empty($v['preset_id']))?'presetitme':''; ?>
+	<div class="formlistitemtitle <?php echo $className; ?>"><?php echo $v['title'];?></div>
+	
+	<div class="togle">▼</div>
+		<div class="formedit">
+		<div class="formeditleft">
+		<h2>フォームのタイトル</h2>
+		<input type="text" class="inputtext" value="<?php echo $v['title'];?>">
+			<div class="switcheditshow_1">
+				<h2>最大文字数</h2>
+				<input type="text" class="inputtext editnumbert" value="20">
+			</div>
+			<div class="switcheditshow_2" style="display:none">
+				<h2>入力項目</h2>
+				<ul class="formtypeselect multinput_edit">
+				<li>
+				<span class="multinputremove">×</span>
+				<input type="text" name="" value="">
+				</li>
+				</ul>
+			</div>
+			<h2>補足文</h2>
+			<textarea cols="40" rows="4" class="inputtextarea"></textarea>
+		</div>
+		<div class="formeditright">
+			<div class="fieldeditsubmit">変更する</div>
+		</div>
+	</div>
+</div>
+<!-- /デフォルトアイテム -->
+<?php } ?>
+</div>
+</div>
+
+
+
+<!-- //////////////////////////////////////////////// -->
+<div id="newinput">
+<h1>フィールドの新規作成</h1>
+<h2>フォームのタイトル</h2>
+<input type="text" id="inputtext" placeholder="フォームのタイトル">
+
+
+<h2>フォームの種類</h2>
+<ul class="newformul modeselecrradio">
+<li><input type="radio" name="radio" value="テキスト入力" class="" checked>テキスト入力</li>
+<li><input type="radio" name="radio" value="プルダウン">プルダウン</li>
+<li><input type="radio" name="radio" value="ラジオボタン">ラジオボタン</li>
+<li><input type="radio" name="radio" value="チェックボックス">チェックボックス</li>
+</ul>
+
+<div class="switcheditshow_new_1">
+  <ul class="formtypeselecttext">
+  <h2>最大文字数</h2>
+  <ul class="newformul">
+  <li><input type="text" name="" id="textnumber" value="20"></li>
+  </ul>
+</div>
+
+
+<div class="switcheditshow_new_2" style="display:none">
+  <ul class="formtypeselecttext">
+  <h2>入力項目</h2>
+  <ul class="newformul multinput">
+  <li><input type="text" name="" value=""></li>
+  <li><input type="text" name="" value=""></li>
+  </ul>
+</div>
+
+
+<h2>補足文</h2>
+<textarea cols=40 rows=4 class="inputtextarea" id="inputtextarea" placeholder="補足文"></textarea>
+
+<h2>必須項目の設定</h2>
+<p><input type="checkbox" name="requiredchk" value="required" class="required">必須項目に設定する</p>
+
+
+
+<div id="makenewinput">フィールドを作成する</div>
+</div>
+
+
+<!-- //////////////////////////////////////////////// -->
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- template -->
+<script id="template" type="text/x-jquery-tmpl">
+
+<div class="formlistitem" id="${formid}">
+
+<div class="formlistitemtitle"> 
+${inputtext}${inputtextarea}
+</div>
+
+
+<div class="togle">▼</div>
+<div class="formedit">
+
+
+
+
+
+
+  <div class="formeditleft">
+
+  <h2>フォームのタイトルさsa</h2>
+   <input type="text" class="inputtext" value="${inputtext}">
+
+
+
+
+    
+        {{if formtype == 'テキスト入力'}}
+         <div class="switcheditshow_1">
+        {{else}} 
+          <div class="switcheditshow_1" style="display:none">
+        {{/if}}
+
+        <h2>最大文字数</h2>
+        <input type="text" class="inputtext editnumbert" value="${textnumber}">
+
+        </div>
+
+
+
+
+
+    {{if formtype == 'テキスト入力'}}
+      <div class="switcheditshow_2" style="display:none">    
+    {{else}} 
+           {{if formtypenumber > 3}}
+              <div class="switcheditshow_2">
+          {{else}}
+              <div class="switcheditshow_2" style="display:none">    
+          {{/if}}
+
+    {{/if}}
+
+
+    <h2>入力項目</h2>
+    <ul class="formtypeselect multinput_edit">
+       {{each multinput}}
+         <li><span class="multinputremove">×</span><input type="text" name="" value="${this}"></li>
+        {{/each}}
+        <li><span class="multinputremove">×</span><input type="text" name="" value=""></li>
+    </ul>
+    </div>
+
+
+    <h2>補足文</h2>
+    <textarea cols=40 rows=4 class="inputtextarea">${inputtextarea}</textarea>
+
+
+    <h2>必須項目の設定</h2>
+        {{if requiredchk == 'required'}}
+          <p><input type="checkbox" name="requiredchk" value="required" checked>必須項目</p>
+        {{else}} 
+         <p><input type="checkbox" name="requiredchk" value="required">必須項目</p>
+      {{/if}}
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+  <div class="formeditright">
+
+
+  <h2>フォームの種類</h2>
+  <ul class="formtypeselect witcheditmode">
+
+    {{if formtype == 'テキスト入力'}}
+      <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="テキスト入力" checked>テキスト入力</li>
+      {{else}} 
+      <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="テキスト入力">テキスト入力</li>
+    {{/if}}
+  
+    {{if formtype == 'プルダウン'}}
+        <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="プルダウン" checked>プルダウン</li>
+          {{else}} 
+            <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="プルダウン">プルダウン</li>
+    {{/if}}
+
+    {{if formtype == 'ラジオボタン'}}
+        <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="ラジオボタン" checked>ラジオボタン</li>
+         {{else}} 
+        <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="ラジオボタン">ラジオボタン</li>
+    {{/if}}
+  
+    {{if formtype == 'チェックボックス'}}
+        <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="チェックボックス" checked>チェックボックス</li>
+      {{else}} 
+       <li><input class="switcheditmoderadio" type="radio" name="${radioname}" value="チェックボックス">チェックボックス</li>
+    {{/if}}
+
+
+
+  </ul>
+    <div class="editsubmit">変更する</div>
+  </div>
+</div>
+
+</div>
+
+
+
+</script>
+<!-- /template -->
+
+
+<!-- template -->
+<script id="multinputli" type="text/x-jquery-tmpl">
+<li><span class="multinputremove">×</span><input type="text" name="example" value=""></li>
+</script>
+<!-- /template -->
+
+
+<!-- template -->
+<script id="formtypeselectreset" type="text/x-jquery-tmpl">
+<li><input type="radio" name="radio" value="テキスト入力" checked>テキスト入力</li>
+<li><input type="radio" name="radio" value="プルダウン">プルダウン</li>
+<li><input type="radio" name="radio" value="ラジオボタン">ラジオボタン</li>
+<li><input type="radio" name="radio" value="チェックボックス">チェックボックス</li>
+</script>
+<!-- /template -->
+
+
+<!-- template -->
+<script id="multinputreset" type="text/x-jquery-tmpl">
+<li><input type="text" name="example" value=""></li>
+<li><input type="text" name="example" value=""></li>
+</script>
+<!-- /template -->
+
+
+<!-- template -->
+<script id="newgroup" type="text/x-jquery-tmpl">
+
+<div class="formgroup">
+<div class="groupup">△</div>
+<div class="groupdown">▽</div>
+<h1>newgroup</h1>
+<div class="formlist">
+</div>
+</div>
+
+</script>
+<!-- /template -->

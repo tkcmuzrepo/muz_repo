@@ -1,0 +1,29 @@
+<div id="main">
+<div id="main_inner">
+
+<h1>
+  <img src="img/replacementface.png" class="replacementface" alt="#" />
+  <img src="img/headerimg.png" class="headerimg" alt="#" />
+</h1>
+
+<form action="main/done/<?php echo $hash; ?>" method="POST">
+<div class="formbox">
+	
+	<h3 class="formItem">
+		<img src="img/userConfirmation.png" class="formItemIcon" alt="ユーザーアイコン" />
+		<img src="img/userConfirmationstr.png" class="formItemTitle" alt="#" />
+	</h3>
+	<table class="accepttable">
+			<?php foreach($view_values as $field_id=>$v){ ?>
+  			<tr>
+  				<th><?php echo $field_titles[$field_id] ?></th>
+				<td><?php echo $v['view']; ?></td>
+  			</tr>
+			<input type="hidden" name="data[Field][<?php echo $field_id; ?>]" value="<?php echo $v['hidden'];?>">
+			<?php } ?>
+		</table>
+	<input type="image" src="img/change.png" class="formbottomleft" alt="#" onclick="history.back();return false;" />
+	<input type="image" src="img/entry.png" class="formbottomright" alt="#" />
+</div>
+</div>
+</form>

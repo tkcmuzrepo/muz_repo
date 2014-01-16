@@ -1,0 +1,34 @@
+<?php
+	
+	$t[0]=$title_map['muz_forms']['setting']='フォーム編集';
+	$t[1]=$title_map['muz_forms']['basic']='フォームの基本設定';
+	$t[2]=$title_map['muz_groups']['lists']='グループ作成管理';
+	$t[3]=$title_map['muz_designs']['lists']='デザイン編集';
+	
+?>
+
+
+<ul id="adminHeaderNaviPage">
+  <li class="back"><a href="muz_forms/"><　戻る</a></li>
+  <li><?php echo "{$title_map[$this->params['controller']][$this->params['action']]}です..."; ?></li>
+</ul>
+
+<?php
+	$map['muz_forms']['setting']=1;
+	$map['muz_forms']['basic']=2;
+	$map['muz_groups']['lists']=3;
+	$map['muz_designs']['lists']=4;
+?>
+<?php $index=$map[$this->params['controller']][$this->params['action']]; ?>
+<ul id="adminHeaderNavi">
+  <li <?php echo (($index==1)?"class=\"selected\"":''); ?>><a href="muz_forms/setting/<?php echo $hash;?>"><?php echo $t[0]; ?></a></li>
+  <li <?php echo (($index==2)?"class=\"selected\"":''); ?>><a href="muz_forms/basic/<?php echo $hash; ?>"><?php echo $t[1]; ?></a></li>
+  <li <?php echo (($index==3)?"class=\"selected\"":''); ?>><a href="muz_groups/lists/<?php echo ($hash); ?>"><?php echo $t[2]; ?></a></li>
+  <li <?php echo (($index==4)?"class=\"selected\"":''); ?>><a href="muz_designs/lists/<?php echo $hash;?>"><?php echo $t[3]; ?></a></li>
+  <li id="adminHeaderNaviFunction">
+    <p id="formhtmlsave">保存</p>
+    <p><a href="muz_previews/preview/<?php echo $hash;?>/<?php echo $date_key; ?>" target="blank" class="preview">プレビュー</a></p>
+	<input type="hidden" value="<?php echo $hash; ?>" name="hash" class="hidden_value">
+	<input type="hidden" value="<?php echo $date_key; ?>" name="date_key" class="hidden_value">
+  </li>
+</ul>

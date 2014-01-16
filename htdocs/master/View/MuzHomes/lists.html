@@ -1,0 +1,56 @@
+<div id="main">
+<div id="main_inner">
+<div id="homeleft">
+<h2>現在の情報</h2>
+
+<?php
+	$login_action=tsv('login_action.tsv');
+	$is_allow_admin_level=in_array($login_user['MuzMasterAccount']['admin_level'],array(0,1));
+?>
+<?php if($is_allow_admin_level){ ?>
+<div class="homebox">
+	<div class="homeboxheader">
+		<p class="homeboxheader_left">
+		ログイン情報
+		</p>
+	</div>
+	<table>
+	    <?php foreach($login_logs as $k=>$v){ ?>
+		<tr>
+	      <td class="td_1"><?php echo (dd('Y.m.d.H:i',$v['MuzLoginLog']['created']));?></td>
+	      <td class="td_2"><?php echo $login_action[$v['MuzLoginLog']['action']]?></td>
+	      <td class="td_3"><?php echo $user_names[$v['MuzLoginLog']['account_id']]; ?></td>
+	    </tr>
+		<?php } ?>
+	</table>
+	</div>
+<?php } ?>
+</div>
+
+<div id="homeright">
+	<h2>エントリー情報</h2>
+	<div class="homebox">
+		<h3>日間エントリー者数</h3>
+		<table>
+		<?php foreach($day_regist_logs as $k=>$v){ ?>
+		<tr>
+		<td><?php echo dd("Y.m.d",$k); ?></td>
+		<td><?php echo ($v);?>名</td>
+		</tr>
+		<?php } ?>
+	</table>
+	</div>
+	<div class="homebox">
+		<h3>月間エントリー者数</h3>
+		<table>
+		<?php foreach($month_regist_logs as $k=>$v){ ?>
+		<?php list($year,$month)=explode('/',$k); ?>
+		<tr>
+		<td><?php echo "{$year}.{$month}"; ?></td>
+		<td><?php echo $v; ?>名</td>
+		</tr>
+		<?php } ?>
+		</table>
+	</div>
+</div>
+</div>

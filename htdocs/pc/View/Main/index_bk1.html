@@ -1,0 +1,435 @@
+<div id="main" class="fotmstart">
+<div id="main_inner">
+
+<h1>
+    <!-- 　画像分割予定 -->
+	<img src="img/headerimg.png" class="headerimg" alt="#" />
+</h1>
+
+<?php foreach($groups as $k=>$v){ ?>
+
+<?php
+	
+	$group=$v[$this->FieldData->getModelName('MuzFormGroupSetting',$isPreview)];
+	$fields=$v[$this->FieldData->getModelName('MuzFormGroupSetting',$isPreview)]['fields'];
+?>
+
+<?php $actionParam=sprintf("%s/%s",$hash,(empty($dateKey)?'':$dateKey)); ?>
+<form action="main/index/<?php echo $actionParam; ?>" method="POST">
+<!-- グループ -->
+<div class="formbox">
+	<h3 class="formItem">
+  		<img src="img/userIcon.png" class="formItemIcon" alt="ユーザーアイコン" />
+  		<img src="img/prof.png" class="formItemTitle" alt="#" />
+  	</h3>
+  	
+	<table class="accepttable">
+		
+		<!-- フィールド -->
+		<?php foreach($fields as $field_id=>$field_data){ ?>
+		<?php if(isset($error_mes[$field_id]) AND !empty($error_mes[$field_id])){ ?>
+		<?php foreach($error_mes[$field_id] as $k=>$v){ ?>
+		<tr>
+			<td style="color:red;margin:0;padding:0;"><?php echo $v; ?></td>
+		</tr>
+		<?php } ?>
+		<?php } ?>
+		<?php $isRequired=!empty($field_data['required_flg']); ?>
+		<tr class="roootselector">
+  			<th>
+  				<p class="inputitem">
+  				
+				<?php if($isRequired){ ?>
+				<img src="img/must.png" class="inputmust" alt="#" />
+  				<?php } ?>
+				
+				<span class="inputitemname">
+					<?php echo $field_data['title'];?>
+				</span>
+  				</p>
+  			</th>
+  			<td>
+  			<?php echo $field_data['field']; ?>
+			<input type="hidden" value="<?php echo $field_id; ?>" class="field_id">
+			</td>
+  		</tr>
+		<?php } ?>
+		<!-- フィールド -->
+	</table>
+	<input type="hidden" value="<?php echo $group['id']; ?>" class="group_id">
+</div>
+<!-- グループ -->
+
+<?php } ?>
+
+
+<div class="formbox termform" >
+	<h3 class="formItem">
+	<img src="img/termicon.png" class="formItemIcon" alt="ユーザーアイコン" />
+	<img src="img/termstr.png" class="formItemTitle" alt="#" />
+	</h3>
+	<center>
+	<img src="img/term.png" class="termpng" alt="#" />
+	</center>
+	<input type="image" src="img/consent.png" class="formbottomright" alt="#" />
+</div>
+</form>
+
+			<?php /* ?>
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  						<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">
+  					ふりがな
+  					</span>
+  					</p>
+  				</th>
+  				
+  				<td>
+  					<input 
+              class="required" 
+              value="" 
+              data_title='姓(ひらがな)'
+  					>
+  					<input
+              class="required" 
+              value=""
+              data_title='名(ひらがな)'
+  					>
+  				</td>
+  			</tr>
+
+ 			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">
+  					性別
+  					</span>
+  					</p>
+  				</th>
+  				
+  				<td>
+					<input 
+					type="radio" 
+					class="inputmail_1 required" 
+					name="sex" 
+					value="女性" 
+					checked
+					>
+					女性
+					
+					<input 
+					type="radio" 
+					class="inputmail_2 required"
+					name="sex" 
+					value="男性"
+					>
+					男性
+  				</td>
+  			</tr>
+
+<!-- 
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">
+  					生年月日
+  					</span>
+  					</p>
+  				</th>
+  				
+
+  				<td>
+  					<input 
+  					class="validate_numbe date_1 validate_number required" 
+  					value=""
+  					data_num='4'
+  					data_title='生年月日'
+  					>
+
+              <select name="pref" id="pref" size="1" tabindex="5" class="inputselect required">
+              <option value="5">2000</option>
+              <option value="5">2000</option>
+              <option value="5">2000</option>
+              <option value="5">2000</option>
+              <option value="5">2000</option>
+              <option value="5">2000</option>
+              <option value="5">2000</option>
+              <option value="5">2000</option>
+              <option value="5">2000</option>
+              </select>
+
+
+  					年
+  					
+  					<input 
+  					class="date_2 validate_number required" 
+  					value=""
+  					data_num='2'
+  					data_title='生年月日'
+  					>月
+
+  					
+  					<input 
+  					class="validate_numbe date_3 validate_number required" 
+  					value=""
+  					data_num='2'
+  					data_title='生年月日'
+  					>
+  					日
+  				</td>
+  			</tr>
+ -->
+
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">
+  					郵便番号
+  					</span>
+  					</p>
+  				</th>
+  				
+  				<td>
+  					<input 
+            id="zip"
+  					class="post_1 validate_number required form_txt-number"
+  					data_num='3'
+  					value=""
+            placeholder="例：101"
+
+  					>
+  					-
+  					<input 
+            id="zip1"
+  					class="post_2 validate_number required form_txt-number" 
+  					data_num='4'
+  					value=""
+            placeholder="例：0021" 
+  					>
+  				</td>
+  			</tr>
+
+
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">
+  					都道府県
+  					</span>
+  					</p>
+  				</th>
+  				
+  				<td>
+  		        <select name="pref" id="pref" size="1" tabindex="5" class="inputselect required">
+              <option value="1">北海道</option><option value="2">青森県</option><option value="3">岩手県</option><option value="4">宮城県</option><option value="5">秋田県</option><option value="6">山形県</option><option value="7">福島県</option><option value="8">茨城県</option><option value="9">栃木県</option><option value="10">群馬県</option><option value="11">埼玉県</option><option value="12">千葉県</option><option value="13">東京都</option><option value="14">神奈川県</option><option value="15">新潟県</option><option value="16">富山県</option><option value="17">石川県</option><option value="18">福井県</option><option value="19">山梨県</option><option value="20">長野県</option><option value="21">岐阜県</option><option value="22">静岡県</option><option value="23">愛知県</option><option value="24">三重県</option><option value="25">滋賀県</option><option value="26">京都府</option><option value="27">大阪府</option><option value="28">兵庫県</option><option value="29">奈良県</option><option value="30">和歌山県</option><option value="31">鳥取県</option><option value="32">島根県</option><option value="33">岡山県</option><option value="34">広島県</option><option value="35">山口県</option><option value="36">徳島県</option><option value="37">香川県</option><option value="38">愛媛県</option><option value="39">高知県</option><option value="40">福岡県</option><option value="41">佐賀県</option><option value="42">長崎県</option><option value="43">熊本県</option><option value="44">大分県</option><option value="45">宮崎県</option><option value="46">鹿児島県</option><option value="47">沖縄県</option><option value="99">海外</option>
+              </select>
+  				</td>
+
+  			</tr>
+
+
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">
+  					住所<br/>
+  					(市区町郡村)
+	  				</span>
+  					</p>
+  				</th>
+
+  				
+  				<td>
+  					<input 
+  					class="inputaddres required" 
+  					value=""
+  					data_num='50'
+  					data_title='住所(市区町郡村)'
+            name="addr" 
+            id="addr" 
+            class="form_txt-normal" 
+            placeholder="例：千代田区外神田1-1"
+  					>
+  				</td>
+  			</tr>
+
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">
+  					電話番号
+  					</span>
+  					</p>
+  				</th>
+  				
+  				<td>
+  					<input 
+  					class="inputtell required validate_number" 
+  					value=""
+  					data_num='12'
+  					data_title='電話番号'
+  					>
+  				</td>
+  			</tr>
+
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">　
+  					E-MAIL　
+  					</span>
+  					</p>
+  				</th>
+  				
+
+  				<td>
+  					<input 
+					class="inputemail required" 
+					value=""
+					data_title='E-MAIL'
+  					>
+  				</td>
+  			</tr>
+  		</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="formbox">
+
+  	<h3 class="formItem">
+  		<img src="img/question.png" class="formItemIcon" alt="システムアイコン" />
+  		<img src="img/questionstr.png" class="formItemTitle" alt="#" />
+  	</h3>
+
+
+  		<table class="accepttable">
+
+
+
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">　
+  					テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+  					</span>
+  					</p>
+  				</th>
+  				
+  				<td>
+  	
+						<select name="" tabindex="5" class="inputselect">
+						<option value="1">項目1</option>
+						<option value="2">項目2</option>
+						<option value="3">項目3</option>
+						</select>
+
+ 
+  				</td>
+  			</tr>
+
+
+
+
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<img src="img/must.png" class="inputmust" alt="#" />
+  					<span class="inputitemname">　
+  					テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+  					</span>
+  					</p>
+  				</th>
+  				
+  				<td>
+  	
+						<select name="" tabindex="5" class="inputselect">
+						<option value="1">項目1</option>
+						<option value="2">項目2</option>
+						<option value="3">項目3</option>
+						</select>
+
+ 
+  				</td>
+  			</tr>
+
+
+
+
+
+  			<tr>
+  				<th>
+  					<p class="inputitem">
+  					<span class="inputitemname">
+  					テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+  					</span>
+  					</p>
+  				</th>
+  				
+  				<td>
+  	
+						<select name="" tabindex="5" class="inputselect">
+						<option value="1">項目1</option>
+						<option value="2">項目2</option>
+						<option value="3">項目3</option>
+						</select>
+
+ 
+  				</td>
+  			</tr>
+
+
+
+
+  		</table>
+  </div>
+
+
+
+
+
+  <div class="formbox termform" >
+
+  	<h3 class="formItem">
+  		<img src="img/termicon.png" class="formItemIcon" alt="ユーザーアイコン" />
+  		<img src="img/termstr.png" class="formItemTitle" alt="#" />
+  	</h3>
+
+
+  			<center>
+  				<img src="img/term.png" class="termpng" alt="#" />
+  			</center>
+
+
+		<img src="img/consent.png" class="formbottomright" alt="#" />
+
+  </div>
+			<?php */ ?>

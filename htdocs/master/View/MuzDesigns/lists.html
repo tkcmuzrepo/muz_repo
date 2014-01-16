@@ -1,0 +1,159 @@
+<script>
+var urlObjOriginal={
+	'urlFormDesign':'<?php echo AJAX_COLOR_SAVE; ?>',
+	'urlUserEdit':'<?php echo AJAX_HTML_AFTER_SAVE_URL; ?>',
+	'urlFormHtmlSave':'<?php echo AJAX_PREVIEW_RESTORE; ?>',
+};
+</script>
+
+
+<div id="main">
+
+<?php echo $this->element('form_navi'); ?>
+
+
+<div id="main_inner" class="formdesign">
+
+<div class="hidden_value" style="display:none;">
+	<?php echo $this->Form->hidden('MuzFormFieldSetting.dateKey',array('value'=>$date_key,'class'=>'date_key')); ?>
+	<?php echo $this->Form->hidden('MuzFormFieldSetting.form_id',array('value'=>$form['MuzForm']['id'],'class'=>'form_id')); ?>
+</div>
+
+<div id="homeleft">
+<h2>ヘッダー　/　フッターの編集</h2>
+
+<!--
+	
+	このパラメータを共通で送信して下さい
+	
+	例)
+	field_id=値&date_key=値
+	date_key,form_idは共にclass名で設定してあります
+	
+-->
+
+<div class="formboxdesign">
+	<div class="formboxdesignhead">
+		<p class="formboxdesignheadtitle">ヘッダー編集</p>
+		<p class="showhtml">HTMLで編集する</p>
+	</div>
+	<?php echo $this->Form->textarea('MuzFormHtmlSetting.header_html',array('cols'=>'','rows'=>'10','placeholder'=>'')); ?>
+	<input type="hidden" value="<?php echo $form['MuzForm']['id'];?>" name="form_id" class="hidden_value">
+	<input type="hidden" value="<?php echo $date_key; ?>" name="date_key" class="hidden_value">
+	<input type="hidden" value="pc" name="site" class="hidden_value">
+</div>
+
+	<form action="muz_designs/lists/<?php echo $hash; ?>/<?php echo ($date_key);?>" enctype="multipart/form-data" method="POST">
+	<ul id="radiolist_2">
+	  <li>
+	    <?php echo $this->Form->file("MuzFormImage.image_path")?>
+	  </li>
+	</ul>
+	<input type="submit" value="送信" name="data[UPLOAD]">
+	</form>
+	
+<?php $img_path=$this->MuzForm->img_path($image['MuzFormImage']['image_path']);?>
+<img src="<?php echo $img_path?>" width="271" height="100">
+
+
+</div>
+
+<div id="homeright">
+<h2>色の変更</h2>
+<div class="homebox">
+<h3>文字の色</h3>
+	<table>
+		<tr>
+			<td>フォームタイトル</td>
+			<td>
+			<?php $params=array('class'=>'color site_string_title_color','id'=>'formdesign_color_1');?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_string_title_color",$params)?>
+			<!-- パラメータ名 site_string_title_color=値 -->
+			</td>
+		</tr>
+		<tr>
+			<td>補助文</td>
+			<td>
+			<?php $params=array('class'=>'color site_string_auxiliary_color','id'=>'formdesign_color_2');?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_string_auxiliary_color",$params)?>
+			<!-- パラメータ名 site_string_auxiliary_color=値 -->
+			</td>
+		</tr>
+		<tr>
+			<td>注意文</td>
+			<td>
+			<?php $params=array('class'=>'color site_string_note_color','id'=>'formdesign_color_3');?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_string_note_color",$params)?>
+			<!-- パラメータ名 site_string_note_color=値 -->
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="homebox">
+<h3>背景の色</h3>
+	<table>
+		<tr>
+			<td>全体背景</td>
+			<td>
+			<?php $params=array('class'=>'color site_bg_entire_color','id'=>'formdesign_color_4');?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_bg_entire_color",$params);?>
+			<!-- パラメータ名 site_bg_entire_color=値 -->
+			</td>
+		</tr>
+		<tr>
+			<td>グループタイトル</td>
+			<td>
+			<?php $params=array('class'=>'color site_bg_group_title_color','id'=>'formdesign_color_5');?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_bg_group_title_color",$params)?>
+			<!-- パラメータ名 site_bg_group_title_color=値 -->
+			</td>
+		</tr>
+		<tr>
+			<td>グループ背景</td>
+			<td>
+			<?php $params=array('class'=>'color site_bg_group_color','id'=>'formdesign_color_6'); ?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_bg_group_color",$params)?>
+			<!-- パラメータ名 site_bg_group_color=値 -->
+			</td>
+		</tr>
+		<tr>
+			<td>フォームタイトル</td>
+			<td>
+			<?php $params=array('class'=>'color site_bg_title_color','id'=>'formdesign_color_7'); ?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_bg_title_color",$params)?>
+			<!-- パラメータ名 site_bg_title_color=値 -->
+			</td>
+		</tr>
+		<tr>
+			<td>フォーム背景</td>
+			<td>
+			<?php $params=array('class'=>'color site_bg_form_color','id'=>'formdesign_color_8');?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_bg_form_color",$params)?>
+			<!-- パラメータ名 site_bg_form_color=値 -->
+			</td>
+		</tr>
+		<tr>
+			<td>入力フォーム</td>
+			<td>
+			<?php $params=array('class'=>'color site_bg_input_color','id'=>'formdesign_color_9'); ?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_bg_input_color",$params)?>
+			<!-- パラメータ名 site_bg_input_color=値 -->
+			</td>
+		</tr>
+		<tr>
+			<td>決定ボタン</td>
+			<td>
+			<?php $params=array('class'=>'color site_bg_decide_btn_color','id'=>'formdesign_color_10');?>
+			<?php echo $this->Form->text("MuzFormColorSetting.color.site_bg_decide_btn_color",$params)?>
+			<!-- パラメータ名 site_bg_decide_btn_color=値 -->
+			</td>
+		</tr>
+	</table>
+</div>
+
+<?php echo $this->Form->hidden("MuzFormColorSetting.form_id",array('value'=>$form['MuzForm']['id'],'name'=>"form_id",'class'=>'hidden_value')); ?>
+<?php echo $this->Form->hidden("MuzFormColorSetting.date_key",array('value'=>$date_key,'name'=>"date_key",'class'=>'hidden_value')); ?>
+
+</div>
+</div>

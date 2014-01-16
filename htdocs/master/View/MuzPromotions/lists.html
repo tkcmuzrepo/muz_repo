@@ -1,0 +1,58 @@
+<script>
+var urlObjOriginal={
+	'urlAdvertisingSubmitNew':'<?php echo AJAX_PROMOTION_SAVE; ?>',
+	'urlAdvertisingSubmitEdit'  :'<?php echo AJAX_PROMOTION_EDIT; ?>',
+	'urlAdvertisingDelete':'<?php echo AJAX_PROMOTION_DELETE; ?>'
+};
+</script>
+
+<div id="main">
+	<div id="main_inner">
+		<div id="form_etc">
+		  <div id="homeleft">
+		    <h2>広告コード管理</h2>
+			
+			<?php foreach($promotions as $k=>$v){ ?>
+		    <div class="advertisingset parent_<?php echo $k; ?>">
+				<input type="hidden" value="<?php echo $v['MuzPromotionSetting']['id']; ?>" class="hidden_value" name="promotion_id" >
+				  <div class="advertisingsethead">
+		            <p class="advertisingtitle"><?php echo $v['MuzPromotionSetting']['name']; ?></p>
+					<?php echo $this->Form->text('MuzPromotionSetting.name',array('value'=>$v['MuzPromotionSetting']['name'],'class'=>'advertisingtitleinput'))?>
+		            <p class="advertisingdelete">削除</p>
+		            <p class="advertisingsubmit" data="<?php echo $k; ?>">保存</p>
+		            <p class="advertisingedit">編集</p>
+		            <p class="advertisingstate">編集中</p>
+		          </div>
+				    <?php $params=array('class'=>'advertisinginput','value'=>$v['MuzPromotionSetting']['promotion_code']); ?>
+				    <?php echo $this->Form->text('MuzPromotionSetting.promotion_code',$params)?>
+		    </div>
+		  <?php } ?>
+		  </div>
+		  
+		  <div id="homeright">
+		    <h2>広告コード新規作成</h2>
+		    <p class="advertisingsetnewtitle">広告コードのタイトル</p>
+			<?php echo $this->Form->text('MuzPromotionSetting.name',array('id'=>'advertisingtitle'))?>
+			<?php echo $this->Form->text('MuzPromotionSetting.promotion_code',array('id'=>'advertisingtextarea'))?>
+		    <input type="submit" value="コードを作成する" id="advertisingsubmitnew">
+		  </div>
+		</div>
+	</div>
+</div>
+
+<!-- template -->
+<script id="advertisingsettemp" type="text/x-jquery-tmpl">
+    <div class="advertisingset">
+         <div class="advertisingsethead">
+          <input type="hidden" value="${promotion_id}" class='hidden_value' name="promotion_id">
+          <p class="advertisingtitle">${advertisingtitle}</p>
+          <input type="text" value="${advertisingtitle}" class="advertisingtitleinput">
+          <p class="advertisingdelete">削除</p>
+          <p class="advertisingsubmit">保存</p>
+          <p class="advertisingedit">編集</p>
+          // <p class="advertisingstate">編集中</p>
+         </div>
+          <textarea class="" rows="10" placeholder="">${advertisingtextarea}</textarea>
+    </div>
+</script>
+<!-- /template -->

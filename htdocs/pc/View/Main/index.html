@@ -1,0 +1,173 @@
+<div id="main" class="fotmstart">
+<div id="main_inner">
+
+<h1>
+  <img src="<?php echo $header_img_url;?>" class="replacementface" alt="#" width="271" height="100"/>
+  <img src="img/headerimg.png" class="headerimg" alt="エントリー必要事項" />
+</h1>
+
+<?php $actionParam=sprintf("%s/%s",$hash,(empty($dateKey)?'':$dateKey)); ?>
+<form action="main/index/<?php echo $actionParam; ?>" method="POST">
+
+<!-- 注意文章 -->
+<div class="note">
+	<?php foreach($view_messages as $k=>$v){ ?>
+	<p><?php echo $v; ?></p>
+	<?php } ?>
+</div>
+
+<?php foreach($groups as $k=>$v){ ?>
+<?php
+	$group=$v[$this->FieldData->getModelName('MuzFormGroupSetting',$isPreview)];
+	$fields=$v[$this->FieldData->getModelName('MuzFormGroupSetting',$isPreview)]['fields'];
+?>
+
+<!-- グループ -->
+<div class="formbox">
+<h3 class="formItem">
+<p><?php echo ($group['group_title']);?></p>
+</h3>
+<p class="formItemTitle_Sub">
+<?php echo ($group['group_sub_title']);?>
+</p>
+<table class="accepttable">
+	<?php foreach($fields as $field_id=>$field_data){ ?>
+	<?php if(isset($error_mes[$field_id]) AND !empty($error_mes[$field_id])){ ?>
+	<?php foreach($error_mes[$field_id] as $k=>$v){ ?>
+	<tr>
+		<td style="color:red;margin:0;padding:0;"><?php echo $v; ?></td>
+	</tr>
+	<?php } ?>
+	<?php } ?>
+	<?php $isRequired=!empty($field_data['required_flg']); ?>
+	<tr class="rootselector">
+		<th>
+			<p class="inputitem">
+			<?php if($isRequired){ ?>
+			<img src="img/must.png" class="inputmust" alt="#" />
+			<?php } ?>
+			<span class="inputitemname">
+			<?php echo $field_data['title'];?>
+			</span>
+			</p>
+		</th>
+		<td>
+			<?php echo $field_data['field']; ?>
+			<?php if(!empty($field_data['sub_title'])){ ?>
+        	<p class="supplement"><?php echo $field_data['sub_title']; ?></p>
+			<?php } ?>
+			<input type="hidden" value="<?php echo $field_id; ?>" class="field_id">
+		</td>
+	</tr>
+	<?php } ?>
+</table>
+<input type="hidden" value="<?php echo $group['id']; ?>" class="group_id">
+</div>
+<!-- グループ -->
+
+<?php } ?>
+
+
+<div class="formbox termform" >
+<h3 class="formItem">
+	<img src="img/termicon.png" class="formItemIcon" alt="弊社会員規約" />
+	<img src="img/termstr.png" class="formItemTitle" alt="弊社会員規約をお読みください。" />
+</h3>
+<center>
+    
+	<p class="termmesse"><a href="main/term/<?php echo $hash; ?>/<?php echo $dateKey; ?>" target="blank">会員規約</a></p>
+	<?php $modelName=$this->FieldData->getModelName('MuzForm',$isPreview);?>
+	<?php echo $this->Form->checkbox("Form{$form[$modelName]['id']}.check",array('class'=>'termmchk'));?>
+	<span class="chkboxname">会員規約に同意する</span>
+	<?php if(isset($error_mes['check'])){ ?>
+	<p style="color:red;"><?php echo $error_mes['check']; ?></p>
+	<?php } ?>
+
+</center>
+  <p class="formbottomright" id="formsubmit">会員規約に同意する</p>
+</div>
+
+</form>
+
+<?php /* ?>
+<div id="main" class="fotmstart">
+<div id="main_inner">
+
+<h1>
+    <!-- 　画像分割予定 -->
+	<img src="img/headerimg.png" class="headerimg" alt="#" />
+</h1>
+
+<?php $actionParam=sprintf("%s/%s",$hash,(empty($dateKey)?'':$dateKey)); ?>
+<form action="main/index/<?php echo $actionParam; ?>" method="POST">
+
+<?php foreach($groups as $k=>$v){ ?>
+
+<?php
+	
+	$group=$v[$this->FieldData->getModelName('MuzFormGroupSetting',$isPreview)];
+	$fields=$v[$this->FieldData->getModelName('MuzFormGroupSetting',$isPreview)]['fields'];
+?>
+
+<!-- グループ -->
+<div class="formbox">
+	<h3 class="formItem">
+  		<img src="img/userIcon.png" class="formItemIcon" alt="ユーザーアイコン" />
+  		<img src="img/prof.png" class="formItemTitle" alt="#" />
+  	</h3>
+  	
+	<table class="accepttable">
+		
+		<!-- フィールド -->
+		<?php foreach($fields as $field_id=>$field_data){ ?>
+		<?php if(isset($error_mes[$field_id]) AND !empty($error_mes[$field_id])){ ?>
+		<?php foreach($error_mes[$field_id] as $k=>$v){ ?>
+		<tr>
+			<td style="color:red;margin:0;padding:0;"><?php echo $v; ?></td>
+		</tr>
+		<?php } ?>
+		<?php } ?>
+		<?php $isRequired=!empty($field_data['required_flg']); ?>
+		<tr class="roootselector">
+  			<th>
+  				<p class="inputitem">
+  				
+				<?php if($isRequired){ ?>
+				<img src="img/must.png" class="inputmust" alt="#" />
+  				<?php } ?>
+				
+				<span class="inputitemname">
+					<?php echo $field_data['title'];?>
+				</span>
+  				</p>
+  			</th>
+  			<td>
+  			<?php echo $field_data['field']; ?>
+			<input type="hidden" value="<?php echo $field_id; ?>" class="field_id">
+			</td>
+  		</tr>
+		<?php } ?>
+		<!-- フィールド -->
+	</table>
+	<input type="hidden" value="<?php echo $group['id']; ?>" class="group_id">
+</div>
+<!-- グループ -->
+<?php } ?>
+</form>
+
+
+
+
+<div class="formbox termform" >
+<h3 class="formItem">
+	<img src="img/termicon.png" class="formItemIcon" alt="弊社会員規約" />
+	<img src="img/termstr.png" class="formItemTitle" alt="弊社会員規約をお読みください。" />
+</h3>
+<center>
+	<img src="img/term.png" class="termpng" alt="会員規約" />
+</center>
+<div src="img/consent.png" class="formbottomright" /><img src="img/consent.png" id="formsubmit" alt="会員規約に同意する"/></div>
+</div>
+
+</form>
+<?php */ ?>

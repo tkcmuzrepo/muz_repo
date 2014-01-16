@@ -1,0 +1,10 @@
+<form action="" method="POST">
+<?php echo $this->Form->textarea('MuzFormHtmlSetting.before_page_html');?>BEFORE<br />
+<?php echo $this->Form->textarea('MuzFormHtmlSetting.after_page_html');?>AFTER<br />
+
+<?php echo $this->Form->checkbox('MuzForm.pc_flg')?>PC&nbsp;
+<?php echo $this->Form->checkbox('MuzForm.mb_flg')?>MB&nbsp;
+<?php echo $this->Form->checkbox('MuzForm.sp_flg')?>SP&nbsp;
+<br />
+<input type="submit" value="送信">
+</form>

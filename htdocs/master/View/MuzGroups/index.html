@@ -1,0 +1,87 @@
+<div id="main">
+
+
+<?php echo $this->element('form_navi'); ?>
+
+<div id="main_inner" class="formmanagement">
+
+	<div id="homeleft">
+		<h2>現在公開中のグループ</h2>
+		<div class="managementformwarap">
+			
+			<input type="hidden" name="group_id" value="<?php echo $v['id']; ?>">
+			
+			<?php if(isset($groups[1])){ ?>
+			<?php foreach($groups[1] as $k=>$v){  ?>
+			<div class="managementform">
+			<?php echo $v['group_title']?>
+			<div class="hidden_value" style="display:none;">
+			<input type="hidden" name="group_id" value="<?php echo $v['id']; ?>">
+			<?php echo $this->Form->hidden("MuzFormFieldSetting.view_flg.{$v['id']}",array('value'=>$v['id'])); ?>
+			<?php echo $this->Form->hidden('MuzFormFieldSetting.dateKey',array('value'=>$date_key,'class'=>'date_key')); ?>
+			</div>
+			</div>
+			<?php } ?>
+			<?php } ?>
+		</div>
+	</div>
+	<div id="main_inner_right" class="formmanagement_right">
+		 
+		  <div id="homeright" class="makenewgroupunused">
+		    <h2>未公開のグループ</h2>
+		    <div class="managementformwarap" id="managementformwarapNew">
+				
+				<?php if(isset($groups[0])){ ?>
+				<?php foreach($groups[0] as $k=>$v){  ?>
+			    <div class="managementform">
+				<?php echo $v['group_title']; ?>
+				
+				<div class="hidden_value" style="display:none;">
+				<input type="hidden" name="group_id" value="<?php echo $v['id']; ?>">
+				<?php echo $this->Form->hidden("MuzFormFieldSetting.view_flg.{$v['id']}",array('value'=>$v['id'])); ?>
+				<?php echo $this->Form->hidden('MuzFormFieldSetting.dateKey',array('value'=>$date_key,'class'=>'date_key')); ?>
+				</div>
+				
+				</div>
+				<?php } ?>
+				<?php } ?>
+				
+			</div>
+		  </div>
+		  <div id="homeright">
+		    <h2>グループの新規作成</h2>
+		    <div class="homeright_inner">
+		    	<p>グループのタイトル</p>
+				<?php echo $this->Form->text("MuzFormGroupSetting.group_title",array('id'=>'inputgrouptitle','placeholder'=>'')); ?>
+		    	<p>サブタイトル</p>
+				<?php echo $this->Form->text("MuzFormGroupSetting.group_sub_title",array('id'=>'inputgrouptitle','placeholder'=>'')); ?>
+		    	<div id="makenewgroup">グループを作成する</div>
+				
+				<div class="hidden_value" style="display:none;">
+				<?php echo $this->Form->hidden('MuzFormFieldSetting.dateKey',array('value'=>$date_key,'class'=>'date_key')); ?>
+				</div>
+				
+		    </div>
+		 </div>
+	</div>
+</div>
+
+</div>
+
+
+
+<!-- template -->
+<script id="managementformtmp" type="text/x-jquery-tmpl">
+<div class="managementform">${inputgrouptitle}</div>
+</script>
+<!-- /template -->
+
+
+
+
+
+
+
+
+</body>
+</html>

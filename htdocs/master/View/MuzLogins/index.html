@@ -1,0 +1,12 @@
+<?php $Form=&$this->Form; ?>
+<div id="main">
+	<form method="post" action="" id="loginform">
+		<img src="img/main_logo.png" alt="ミュゼプラチナム" />
+		<?php echo $Form->text('MuzMasterAccount.login_id',array('placeholder'=>'アカウント'));?><br />
+		<?php echo $Form->text('MuzMasterAccount.login_pass',array('placeholder'=>'パスワード'));?>
+		<?php if($this->data){ ?>
+		<p>メッセージメッセージメッセージメッセージ</p>
+		<?php } ?>
+		<input type="submit" class="loginsubmit" value="ログイン"/>
+	</form>
+</div>

@@ -1,0 +1,444 @@
+@charset "utf-8";
+body {
+margin: 0;
+padding: 0;
+-moz-background-size: cover;
+background-size: cover;
+font-family: "Helvetica","Lucida Grande","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","メイリオ","Meiryo","ＭＳ Ｐゴシック",sans-serif;
+background: #e9f2f9;
+padding-bottom: 200px;
+}
+#wrap {
+padding-bottom: 200px;
+margin-bottom: 200px;
+float: left;
+width: 100%;
+}
+ul {
+list-style-type: none;
+margin: 0px;
+padding: 0px;
+float: left;
+width: 100%;
+}
+
+li { margin: 0px }
+#logo { margin: 0px }
+#logo img { width: 100% }
+#header { background: #ffffff }
+#header_title {
+width: 100%;
+margin: 0 auto;
+height: 50px;
+position: relative;
+background: #ffffff;
+float: left;
+}
+#header_title_inner {
+width: 100%;
+margin: 0 auto;
+position: relative;
+height: 100%;
+}
+#header_title_inner h1 { }
+.replacementface {
+position: absolute;
+top: 1px;
+}
+#header_title_inner p {
+float: right;
+font-size: 12px;
+color: #FFF;
+}
+#header_inner {
+width: 100%;
+height: 40px;
+position: relative;
+background: #DDD;
+float: left;
+}
+.headerUl {
+width: 960px;
+margin: 0 auto;
+background: #F00;
+height: 40px;
+position: relative;
+padding: 0px;
+}
+.headerUl .selected { background: #a2c4d9 }
+.headerUl li {
+list-style-type: none;
+float: left;
+text-align: center;
+width: 192px;
+background: #EEE;
+height: 40px;
+line-height: 40px;
+background: #C6C6C6;
+color: #FFF;
+}
+.headerUl li:hover { background: #a2c4d9 }
+#main {
+width: 100%;
+margin: 0 auto;
+}
+#main_inner {
+margin-top: 50px;
+width: 97%;
+margin: 0 auto;
+}
+#main_inner h1 { position: relative }
+#main_inner_left {
+float: left;
+width: 570px;
+}
+.clear { clear: both }
+.formbox {
+width: 98%;
+background: #FFF;
+border-radius: 8px;
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+box-shadow: 0 10px 6px -6px #777;
+margin-bottom: 100px;
+margin: 0 auto;
+padding-bottom: 30px;
+margin-bottom: 25px;
+}
+.note {
+width: 98%;
+border-radius: 8px;
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+margin-bottom: 100px;
+margin: 0 auto;
+margin-bottom:10px;
+font-size:13px;
+}
+.formItemTitle_Sub {
+background: #FFF;
+border-radius: 8px;
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+margin-bottom: 100px;
+margin: 0 auto;
+padding-left: 3%;
+font-size: 12px;
+}
+.formbox .formbottomleft {
+position: absolute;
+left: 50px;
+bottom: -25px;
+}
+.clearfix:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+.formbox .formbottomright {
+position: absolute;
+right: 50px;
+bottom: -25px;
+}
+.formbox .formbottomright:hover { opacity: 0.9 }
+.formbox h2 {
+background: #4794ce;
+height: 60px;
+text-align: center;
+box-shadow: 0 10px 6px -6px #777777;
+}
+.formbox h2 img { margin-top: 17px }
+.formbox h3 {
+background: #4794CE;
+box-shadow: 0px 8px 9px -7px #777;
+position: relative;
+margin: 0px;
+margin-bottom: 15px;
+color: #FFF;
+text-align: left;
+padding-left: 3%;
+font-weight: normal;
+line-height: 30px;
+float: left;
+width: 97%;
+border-radius: 2px;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+font-size: 15px;
+height: 30px;
+}
+.formbox input {
+border-radius: 2px;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border: solid 2px #c9dbe6;
+background: #e9f1f9;
+float: left;
+width: 42%;
+}
+.formbox textarea {
+border-radius: 2px;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border: solid 2px #c9dbe6;
+background: #e9f1f9;
+float: left;
+width: 95%;
+}
+.formbox select {
+border-radius: 2px;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border: solid 1px #c9dbe6;
+background: #e9f1f9;
+margin-right: 5px;
+float: left;
+font-size: 12px;
+}
+.accepttanks {
+margin-top: 35px;
+margin-bottom: 35px;
+}
+.acceptinquir { margin-bottom: 35px }
+.accepttable {
+width: 100%;
+float: left;
+}
+.inputitem .maxinput { width: 95% }
+.accepttable th { }
+.accepttable td {
+background: #e9f1f9;
+color: #8fc4ea;
+padding: 15px;
+}
+.accepttable tr { border: solid #FFF 10px }
+.fotmstart .termform { min-height: 130px }
+.formstart .termpng { margin-top: 50px }
+.fotmstart .accepttable { }
+.fotmstart .accepttable th {
+background: #FFF;
+padding: 10px;
+}
+
+.termform{
+margin-top: 20px;
+}
+
+.fotmstart .accepttable td {
+background: #FFF;
+color: #8FC4EA;
+padding: 15px;
+}
+.fotmstart .accepttable tr { }
+.inputitem {
+color: #51ABE3;
+margin: 0 auto;
+font-size: 15px;
+position: relative;
+width: 95%;
+text-align: left;
+margin-top: 10px;
+}
+.inputitem_bub {
+color: #fffff;
+padding-left: 25px;
+}
+.inputname {
+display: table-cell;
+vertical-align: middle;
+text-align: center;
+width: 190px;
+}
+.inputmust {
+position: absolute;
+left: -5px;
+color: #F00;
+top: -8px;
+}
+.accepttable { font-size: 12px }
+.accepttable th {
+width: 35%;
+color: #FFF;
+background: #51ABE3;
+}
+.inputitemname {
+color: #4794CE;
+margin-bottom: 5px;
+position: relative;
+display: block;
+float: left;
+width: 100%;
+margin-top: 0px;
+}
+#main .radioinput {
+width: 20px;
+padding: 0px;
+height: 16px;
+margin-right: 0px;
+}
+.inputitem .leftinput { float: right }
+.inputUnit {
+float: left;
+margin-right: 10px;
+}
+.formbox .inputtell {
+float: left;
+width: 50px;
+}
+.fitimg {
+width: 98%;
+margin: 0 auto;
+margin-bottom: 25px;
+margin-top: 25px;
+}
+.fitimg img { width: 100% }
+.formItemTitle {
+width: 22px;
+position: absolute;
+left: 6px;
+top: 3px;
+}
+
+
+.submmesse { padding-left: 24px }
+.linkmesse {
+background: #4794CE;
+box-shadow: 0px 8px 9px -7px #777;
+position: relative;
+margin: 0px;
+margin-bottom: 15px;
+color: #FFF;
+padding-left: 3%;
+font-weight: normal;
+line-height: 30px;
+float: left;
+width: 97%;
+border-radius: 2px;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+font-size: 15px;
+height: 30px;
+text-align: center;
+text-decoration: none;
+}
+
+#main .linkmesse_2_submit,
+.linkmesse_2 {
+background: #C0A671;
+position: relative;
+margin: 0px;
+margin-bottom: 15px;
+color: #FFF;
+padding-left: 3%;
+font-weight: normal;
+line-height: 40px;
+float: left;
+width: 97%;
+font-size: 15px;
+text-align: center;
+text-decoration: none;
+height: 40px;
+box-shadow: 0px 8px 9px -7px #777;
+margin-top: 20px;
+border: none;
+border-radius: 0px;
+-webkit-border-radius:0px;
+}
+
+.linkmesse_3,
+.linkmesse_4 {
+background: #4794CE;
+text-align: center;
+display: block;
+float: left;
+text-decoration: none;
+color: #ffffff;
+font-size: 12px;
+}
+.linkmesse_3 {
+background: #C0A671;
+width: 40%;
+}
+.linkmesse_4 {
+background: #4794CE;
+width: 60%;
+}
+.linkmessestr {
+margin: 0px;
+margin-bottom: 2px;
+margin-top: 10px;
+float: left;
+}
+.linkmessestr_2 {
+color: #C0A671;
+margin: 0px;
+text-align: center;
+margin-bottom: 10px;
+margin-top: 10px;
+float: left;
+font-size: 12px;
+}
+.messeitem {
+color: #4794CE;
+margin-bottom: 5px;
+position: relative;
+display: block;
+float: left;
+width: 100%;
+margin-top: 0px;
+}
+.inputcenter {
+text-align: center;
+float: left;
+width: 20px;
+line-height: 0px;
+}
+.formbox #post_1,
+.formbox #post_2 { width: 60px }
+.formItemCenter {
+text-align: center;
+width: 100%;
+display: block;
+}
+.imgfit { width: 100% }
+.inputauxiliary {
+padding-left: 5px;
+padding-right: 5px;
+float: left;
+height: 28px;
+line-height: 28px;
+}
+
+#wrap .termmchk{
+width: 20px;
+}
+.formbox .inputmax {width:95%}
+.formbox .inputzip {width:50px}
+.validate_checkbox { }
+.validate_checkbox li {
+float: left;
+margin-bottom: 5px;
+padding: 0px;
+padding-right: 5px;
+}
+.validate_checkbox input {
+width: 20px;
+float: left;
+}
+.chkboxname {
+float: left;
+height: 20px;
+line-height: 12px;
+padding: 0px;
+margin: 0px;
+}
+.supplement {
+float: left;
+width: 100%;
+}
+#termstr{
+padding: 20px;
+font-size: 12px;
+}

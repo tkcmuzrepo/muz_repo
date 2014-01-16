@@ -1,0 +1,62 @@
+<form action="main/index/<?php echo $hash; ?>" method="POST">
+<div id="main" class="formstart">
+	<div id="main_inner">
+			<div class="fitimg">
+			<img src="img/info.png" class="" alt="#" />
+			</div>
+			
+			<!-- 注意文章 -->
+			<div class="note">
+			  <?php foreach($view_messages as $k=>$v){ ?>
+				<p><?php echo $v; ?></p>
+			  <?php } ?>
+			</div>
+			
+			<?php foreach($groups as $k=>$v){ ?>
+			<?php
+				$group=$v[$this->FieldData->getModelName('MuzFormGroupSetting',$isPreview)];
+				$fields=$v[$this->FieldData->getModelName('MuzFormGroupSetting',$isPreview)]['fields'];
+			?>
+			<div class="formbox">
+				<h3 class="clearfix"><?php echo $group['group_title'];?></h3>
+				<h4><?php echo $group['group_sub_title']; ?></h4>
+				<!-- フィールド -->
+				<?php foreach($fields as $field_id=>$field_data){ ?>
+				<?php if(isset($error_mes[$field_id]) AND !empty($error_mes[$field_id])){ ?>
+				<?php foreach($error_mes[$field_id] as $k=>$v){ ?>
+				<?php } ?>
+				<?php } ?>
+				<?php $isRequired=!empty($field_data['required_flg']); ?>
+				<div class="inputitem clearfix">
+				<p class="inputitemname"><?php echo $field_data['title'];?>
+				<?php if($isRequired){ ?>
+				<span class="inputmust">●</span></p>
+				<?php } ?>
+		  		<?php echo $field_data['field']; ?>
+		 		<input type="hidden" value="<?php echo $field_id; ?>" class="field_id">
+				<p class="supplement"><?php echo $field_data['sub_title'];?><br/></p>
+				</div>
+	 			<?php } ?>
+			</div>
+			<?php } ?>
+			<div class="formbox termform">
+				<h3 class="formItem">
+					<span class="inputitem_bub">会員規約について</span>
+					<img src="img/term.png" class="formItemTitle" alt="#" />
+				</h3>
+				<div class="inputitem clearfix">
+					<p class="linkmessestr">弊社会員規約をお読みください。</p>
+					<a href="main/term/<?php echo $hash; ?>/<?php echo $dateKey; ?>" class="linkmesse">会員規約</a>
+					<?php $modelName=$this->FieldData->getModelName('MuzForm',$isPreview);?>
+					<?php echo $this->Form->checkbox("Form{$form[$modelName]['id']}.check",array('class'=>'termmchk'));?>
+					<span class="chkboxname">会員規約に同意する</span>
+					<?php if(isset($error_mes['check'])){ ?>
+					<p style="color:red;"><?php echo $error_mes['check']; ?></p>
+					<?php } ?>
+				</div>
+				<p class="linkmesse_2" id="formsubmit">会員規約に同意する</p>
+			</div>
+		</div>
+	</div>
+</div>
+</form>

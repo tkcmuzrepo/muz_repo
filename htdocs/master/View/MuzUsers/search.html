@@ -1,0 +1,122 @@
+<script>
+var urlObjOriginal={
+};
+</script>
+
+
+<div id="main">
+<div id="main_inner" class="userlist">
+
+<div id="homeleft" >
+	
+	
+	<form action="muz_users/search" method="POST">
+	<h2>ユーザー 一覧<span class="admin_download"><input type="image" src="img/admin_download_2.png" alt="ダウンロード" name="data[CSV]"></span></h2>
+	</form>
+	
+	<div class="userlisthomeboxmain">
+		
+		<?php foreach($sort_regist_users as $k=>$v){ ?>
+		<?php $data=$regist_data[$v['MuzUser']['id']]; ?>
+		<?php $name=(isset($data['preset_text_name']))?$data['preset_text_name']:'未設定'; ?>
+		<?php unset($data['preset_text_name']);?>
+		
+		<div class="hidden_value" style="display:none;">
+			<?php echo $this->Form->hidden("MuzUser.id.{$v['MuzUser']['id']}");?>
+		</div>
+		
+		<form action="muz_user_csv/get_csv/<?php echo $v['MuzUser']['id'];?>" method="POST">
+		<div class="userlistitemset">
+			<div class="userlistitemsethead">
+				<p class="userlistitemtitle"><?php echo $name; ?></p>
+				<p class="userlistitemshow">表示する</p>
+     	        <p class="userlistitemclose">閉じる</p>
+				<p class="userlistitemdelete"><img src="img/admin_delete.png" alt="削除"/></p>
+				<p class="userlistitemdownlosd">
+					<input type="image" src="img/admin_download.png" alt="ダウンロード">
+				</p>
+				<p class="userlistitemsave"><img src="img/admin_save.png" alt="保存"/></p>
+				<p class="userlistitemeditting"><img src="img/admin_editting.png" alt="編集中"/></p>
+				<p class="userlistitemsethead_left">a</p>
+			</div>
+			<div class="textareashow">
+				<?php foreach($data as $k=>$v){ ?>
+                  <table>
+                  <tr>
+                  <td style="width:150px;"><?php echo ktai_str_cut($k,8); ?></td>
+                  <td style="padding-left:10px;padding-right:10px;">:</td>
+                  <td><?php echo $v; ?></td>
+                  </tr>
+				  </table>
+				<?php } ?>
+				</pre>
+			</div>
+		</div>
+		</form>
+		<?php } ?>
+		<div class="homepagination">
+		<?php echo $this->Paginator->prev("<",array("class"=>"prev_paginator",'tag'=>"div"));?>
+		<?php echo $this->Paginator->numbers(array("separator"=>" ","tag"=>"div","class"=>"paginator"));?>
+		<?php echo $this->Paginator->next(">",array("class"=>"next_paginator",'tag'=>"div"));?>
+		</div>
+	</div>
+</div>
+
+<form action="muz_users/search" method="POST">
+<div class="homeright_list_wrap">
+	<div class="homeright_list">
+	<h2>並び替え/絞り込み</h2>
+	<div class="userlisthomebox">
+	<h2>並び替え</h2>
+	<ul id="radiolist">
+		
+		<?php $is_created_check=(!isset($date_sort_flg) OR empty($date_sort_flg))?'':'checked'; ?>
+		<?php $is_name_check=((!isset($name_sort_flg) OR empty($name_sort_flg)) AND $is_created_check)?'':'checked'; ?>
+		<li><input type="radio" name="data[MuzUser][sort]" value="created" <?php echo ($is_created_check); ?> >最新順</li>
+		<li><input type="radio" name="data[MuzUser][sort]" value="name" <?php echo ($is_name_check); ?>  >名前順</li>
+	</ul>
+	<div class="claer"></div>
+	</div>
+		<div class="homebox">
+		<h2>絞り込み</h2>
+		<table>
+			<tr>
+			<td class="td_1">名前</td>
+			<td class="td_2">
+				<?php echo $this->Form->text('MuzUser.name')?>
+			</td>
+			</tr>
+			<tr>
+				<td class="td_1">フォーム名</td>
+				<td class="td_2">
+					<?php echo $this->Form->select("MuzForm.id",$form_titles);?>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_1">登録年月日</td>
+				<td class="td_2">
+					<?php echo $this->Form->text('MuzUser.created_start',array('class'=>'userlist_finfdate','readonly'=>'readonly','id'=>'finfdate_more'))?>&nbsp;～&nbsp;
+					<?php echo $this->Form->text('MuzUser.created_end',array('class'=>'userlist_finfdate','readonly'=>'readonly','id'=>'finfdate?before'))?>
+				</td>
+			</tr>
+		</table>
+		<input type="submit" name="data[SEARCH]" id="userlistserchsubmit2" value="この条件で検索する">
+		<br/>
+		</div>
+</div>
+</div>
+</div>
+</div>
+
+</form>
+
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+<!--
+$(function() {
+$(".userlist_finfdate").datepicker();
+});
+// -->
+</script>

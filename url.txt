@@ -1,0 +1,255 @@
+<script type="text/javascript">
+<!--
+var urlObj={
+	
+	/*
+	■広告コードの編集
+	data[MuzPromotionSetting][name] : タイトル
+	data[MuzPromotionSetting][promotion_code] : プロモーションコード
+	
+	※class="advertisingset" の子要素に class=hidden_valueを設定しています
+	
+	■広告コード新規作成
+	data[MuzPromotionSetting][name] : タイトル
+	data[MuzPromotionSetting][promotion_code] : プロモーションコード
+	
+	※id=homeright の子要素に class=hidden_value を設定しています
+	
+	*/
+	
+	/*
+	
+	■ログイン情報の新規作成
+	http://up.hyhdmax.com/admin/useredit.php
+
+	data[MuzMasterAccount][name]       ユーザ名
+	data[MuzMasterAccount][login_id]		    ユーザID
+	data[MuzMasterAccount][login_pass]	    パスワード
+	data[MuzMasterAccount][login_pass_conf]   パスワード確認
+	data[MuzMasterAccount][master_flg]		master権限付与  0チェック無　　1チェック有
+	
+	※ useredititemtablewrap の子要素に class=hidden_value を設定しています
+	
+	●入力制限
+	ユーザIDは英数字のみ
+	名前は制限なし
+	パスワード、パスワード確認は英数字のみ
+	*/
+	
+    'urlUserSubmit':'server.php',
+	
+	/*
+	ログイン情報の編集
+	http://up.hyhdmax.com/admin/useredit.php
+
+	data[MuzMasterAccount][name]       ユーザ名
+	data[MuzMasterAccount][login_id]		    ユーザID
+	data[MuzMasterAccount][login_pass]	    パスワード
+	
+	# ★編集時は権限の変更はありませんのでつけなくて大丈夫です
+	# data[Form][master_flg]		master権限付与  0チェック無　　1チェック有
+	
+	パスワードhiddenタグ
+	<input type="hidden" name="user_id" value="11111">
+
+
+	●入力制限
+	ユーザIDは英数字のみ
+	名前は制限なし
+	パスワード、パスワード確認は英数字のみ
+
+	*/
+	
+	'urlUserEdit':'server.php',
+	
+	/*_
+	■フォームデザインの変更
+	http://up.hyhdmax.com/admin/formdesign.php
+	
+	data[MuzFormColorSetting][site_string_title_color]             フォームタイトル
+	data[MuzFormColorSetting][site_string_auxiliary_color]		    補足文
+	data[MuzFormColorSetting][site_string_note_color]	            注意文
+	data[MuzFormColorSetting][site_bg_entire_color]		        全体背景
+	data[MuzFormColorSetting][site_bg_group_title_color]		    グループタイトル
+	data[MuzFormColorSetting][site_bg_group_color]		            グループ背景
+	data[MuzFormColorSetting][site_bg_title_color]		            フォームタイトル
+	data[MuzFormColorSetting][site_bg_form_color]		            フォーム背景
+	data[MuzFormColorSetting][site_bg_input_color]	            	入力ボタン
+	data[MuzFormColorSetting][site_bg_decide_btn_color]		    決定ボタン
+	data[MuzFormHtmlSetting][header_html] : ヘッダー編集
+	data[MuzFormHtmlSetting][fotter_html] : フッター編集
+	
+	※ class="formdesign" の子要素に class=hidden_value があります
+	※ 各項目が変更されたら その値と hidden_value のデータを送信して下さい
+	
+	*/
+	
+	'urlFormDesign':'server.php',
+	
+	/*
+	フィールドの新規追加
+	http://up.hyhdmax.com/admin/formedit.php
+	
+	テキスト入力
+	data[Form][Title]           タイトル
+	data[Form][Type]            フォームタイトル
+	data[Form][sub_title]		補足文
+	data[Form][view_flg]	    注意文
+	data[Form][required_flg]	必須フラグ
+	data[Form][max_num]		    最大文字数
+	data[Form][????]		    入力文字制限
+							
+	テキストエリア
+	data[Form][Title]           タイトル
+	data[Form][Type]            フォームタイトル
+	data[Form][sub_title]		補足文
+	data[Form][view_flg]	    注意文
+	data[Form][required_flg]	必須フラグ
+
+
+
+	プルダウン/ラジオボタン/チェックボックス/テキストエリア
+
+	data[Form][Title]           タイトル
+	data[Form][Type]            フォームタイトル
+	data[Form][sub_title]		補足文
+	data[Form][view_flg]	    注意文
+	data[Form][required_flg]	必須フラグ
+	data[Form][value0]	        入力項目
+	
+
+
+	返り値
+	?
+
+
+	*/
+	
+	'urlFieldNew':'server.php',
+
+
+
+
+
+
+	/*
+	■フィールドの更新処理
+	http://up.hyhdmax.com/admin/formedit.php
+	
+	data[MuzFormFieldSetting][title] : タイトル
+	data[MuzFormFieldSetting][sub_title] : サブタイトル
+	data[MuzFormFieldSetting][view_flg] : 表示非表示 0 非表示 , 1 表示
+	data[MuzFormFieldSetting][required_flg] : 入力必須 0 必須では無い , 1 必須
+	data[MuzFormFieldSetting][max_num] : 最大入力文字数
+	data[MuzFormFieldSetting][validate_type] : 入力制限
+	data[MuzFormValueSetting][value][0] ... data[MuzFormValueSetting][value][9] : 選択肢 ※3つ目の数値は可変です。 class='formtypeselect' の下のデータを送信して下さい
+	※ class=formlistitem の子要素に class=hidden_value を設定しています 入力データと一緒に送信して下さい
+	
+	
+#	テキスト入力
+#	data[Form][field_id]		フィールドID
+#	data[Form][Title]           タイトル
+#	data[Form][Type]            フォームタイトル
+#	data[Form][sub_title]		補足文
+#	data[Form][view_flg]	    注意文
+#	data[Form][required_flg]	必須フラグ
+#	data[Form][max_num]		    最大文字数
+#	data[Form][????]		    入力文字制限
+#	
+#	テキストエリア
+#	data[Form][field_id]		フィールドID
+#	data[Form][Title]           タイトル
+#	data[Form][Type]            フォームタイトル
+#	data[Form][sub_title]		補足文
+#	data[Form][view_flg]	    注意文
+#	data[Form][required_flg]	必須フラグ
+#
+#
+#	プルダウン/ラジオボタン/チェックボックス/テキストエリア
+#	data[Form][field_id]		フィールドID
+#	data[Form][Title]           タイトル
+#	data[Form][Type]            フォームタイトル
+#	data[Form][sub_title]		補足文
+#	data[Form][view_flg]	    注意文
+#	data[Form][required_flg]	必須フラグ
+#	data[Form][value0]	        入力項目
+
+	*/
+	
+	'urlFieldEdit':'server.php',
+
+
+
+	/*
+	■フィールドの削除
+	http://up.hyhdmax.com/admin/formedit.php
+	
+	※ class=formlistitem の子要素に class=hidden_value を設定しています これだけ送信して下さい
+	
+	#data[Form][field_id]		フィールドID
+	
+	*/
+	
+	'urlFieldDelete':'server.php',
+
+	/*
+	フィールドのソート
+	http://up.hyhdmax.com/admin/formedit.php
+	
+	data[MuzFormFieldSetting][sort_number] : ドラッグ先のグループ内での現在の位置
+	data[MuzFormFieldSetting][group_id] : 移動先のグループID
+	※ class=formlistitem の子要素に class=hidden_value を設定しています 入力データと一緒に送信して下さい
+	※ グループIDはclass=formgroup の子要素に name="group_id" の要素があります
+	
+	#g_3 
+	#f_2_f_3_f_4_f_5_f_6_f_7_f_9_f_10 
+
+	*/
+	
+	'urlSortUpdate':'server.php',
+
+	/*
+	グループの順番入れ替え
+	http://up.hyhdmax.com/admin/formedit.php
+	
+	data[MuzFormFieldSetting][sort_number] : 移動後の現在の位置
+	data[MuzFormFieldSetting][group_id] : グループID
+	※ グループIDは class=formgroup の子要素に name="group_id" の要素があります
+	
+	#data[Form][group_sort_values]   //グループの順番  g_1_g_2
+	*/
+	
+	'urlGroupSort':'server.php',
+
+	/*
+	■グループの新規作成
+	http://up.hyhdmax.com/admin/groupmanagement.php
+	data[MuzFormGroupSetting][group_title] : タイトル
+	data[MuzFormGroupSetting][group_sub_title] : サブタイトル
+	※ class=homeright_inner の子要素に class=hidden_value を設定しています 新規作成時に一緒にサーバに送信して下さい
+	※ サーバAjax通信後 group_id のパラメータでグループIDを返すので name="group_id" の value にその値を埋め込んで下さい
+	*/
+	
+	'urlGroupManagementNew':'server.php'
+	
+	/*
+	グループの配置保存
+	■http://up.hyhdmax.com/admin/groupmanagement.php
+	data[MuzFormGroupSetting][view_flg] : 表示か非表示か 0 : 非表示 , 1 : 表示
+	※ class=managementformwarap の子要素に class=hidden_value を設定しています ドラッグ完了後に view_flg と一緒にサーバに送信して下さい
+	*/
+	
+	'urlGroupManagementSort':'server.php',
+
+	/*
+	グループの削除
+	http://up.hyhdmax.com/admin/groupmanagement.php
+	※ class=managementformwarap の子要素に class=hidden_value を設定しています これだけ削除後にサーバに送信して下さい
+	*/
+	
+	'urlGroupManagementDelete':'server.php',
+
+}; 
+
+// -->
+</script>

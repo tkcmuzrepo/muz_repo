@@ -1,0 +1,152 @@
+<script>
+var urlObjOriginal={
+	'urlNoteNew':'<?php echo AJAX_NOTE_SAVE; ?>',
+	'urlNoteDelete':'<?php echo AJAX_NOTE_DELETE; ?>',
+	'urlNoteEdit':'<?php echo AJAX_NOTE_EDIT; ?>',
+	'urlNoteShow':'<?php echo AJAX_NOTE_VIEW_EDIT; ?>',
+	'urlUserEdit':'<?php echo AJAX_HTML_AFTER_SAVE_URL; ?>',
+	'urlFormHtmlSave':'<?php echo AJAX_PREVIEW_RESTORE; ?>',
+};
+</script>
+
+<div id="main">
+<?php echo $this->element('form_navi'); ?>
+
+<div id="main_inner" class="formsetting">
+<div id="managementnewform">
+<h2>フォームの基本設定</h2>
+
+<div class="formsettingboxwrap">
+
+
+<div class="formsettingbox">
+	<div class="formsettingboxhead left">
+		<p class="formsettingboxheadtitle">応募後ページ テキスト編集　PC画面</p>
+		<p class="showhtml" id="after_page_html">変更する</p>
+	</div>
+	<?php echo $this->Form->textarea("MuzFormHtmlSetting.after_page_html",array('cols'=>'','rows'=>'10')); ?>
+	<input type="hidden" value="<?php echo $form['MuzForm']['id'];?>" name="form_id" class="hidden_value">
+	<input type="hidden" value="<?php echo $date_key; ?>" name="date_key" class="hidden_value">
+	<input type="hidden" value="pc" name="site" class="hidden_value">
+</div>
+
+<?php /* ?>
+<div class="formsettingbox parent_1">
+	<div class="formsettingboxhead left">
+		<p class="formsettingboxheadtitle">応募後ページ テキスト編集　PC画面</p>
+		<p class="showhtml" data="1">変更する</p>
+	</div>
+	<?php echo $this->Form->textarea("MuzFormHtmlSetting.after_page_html",array('cols'=>'','rows'=>'10')); ?>
+	<?php echo $this->Form->hidden("MuzForm.id",array('value'=>$form['MuzForm']['id'],'class'=>'hidden_value'))?>
+</div>
+<?php */ ?>
+
+<div class="formsettingbox">
+	<div class="formsettingboxhead left">
+		<p class="formsettingboxheadtitle">応募後ページ テキスト編集　スマートフォン</p>
+		<p class="showhtml" id="sp_after_page_html">変更する</p>
+	</div>
+	<input type="hidden" value="<?php echo $form['MuzForm']['id'];?>" name="form_id" class="hidden_value">
+	<input type="hidden" value="<?php echo $date_key; ?>" name="date_key" class="hidden_value">
+	<input type="hidden" value="sp" name="site" class="hidden_value">
+	<?php echo $this->Form->textarea("MuzFormHtmlSetting.mb_after_page_html",array('cols'=>'','rows'=>'10')); ?>
+</div>
+
+<div class="formsettingbox">
+	<div class="formsettingboxhead left">
+		<p class="formsettingboxheadtitle">応募後ページ テキスト編集 フューチャーフォン</p>
+		<p class="showhtml" id="mb_after_page_html">変更する</p>
+	</div>
+	<input type="hidden" value="<?php echo $form['MuzForm']['id'];?>" name="form_id" class="hidden_value">
+	<input type="hidden" value="<?php echo $date_key; ?>" name="date_key" class="hidden_value">
+	<input type="hidden" value="mb" name="site" class="hidden_value">
+	<?php echo $this->Form->textarea("MuzFormHtmlSetting.mb_after_page_html",array('cols'=>'','rows'=>'10')); ?>
+</div>
+
+<div class="formsettingbox">
+
+<div class="formsettingboxhead left">
+<p class="formsettingboxheadtitle">注意文の編集</p>
+</div>
+
+<table class="table table-hover notetable">
+	<tr>
+	  <td>
+	    <h4>新規作成</h4>
+	  </td>
+	</tr>
+	<tr>
+	  <td class="th">
+		<?php echo $this->Form->textarea("MuzFormMessage.message",array('class'=>'form-control','rows'=>'1','id'=>'noteNewTextarea'));?>
+	  </td>
+	  <td>
+		<div class="parent">
+	    <button type="button" class="btn btn-warning" id="noteNewSubmit">　　　　 注意文を新規作成する 　　　　</button>
+		<?php echo $this->Form->hidden("MuzFormMessage.form_id",array('value'=>$form['MuzForm']['id'],'name'=>"form_id",'class'=>'hidden_value')); ?>
+		<?php echo $this->Form->hidden("MuzFormMessage.date_key",array('value'=>$date_key,'name'=>"date_key",'class'=>'hidden_value')); ?>
+		</div>
+	  </td>
+	</tr>
+</table>
+
+<table class="table table-hover notetable" id="notearea">
+<tr>
+	<td>
+		<h4>既存の注意文</h4>
+	</td>
+</tr>
+<?php foreach($messages as $k=>$v){ ?>
+<tr class="parent">
+	<td class="th">
+		
+		<?php $params=array('class'=>'form-control','rows'=>1,'disabled'=>true,'value'=>$v['MuzFormMessage']['message']); ?>
+		<?php echo $this->Form->textarea("MuzFormMessage.message.{$v['MuzFormMessage']['id']}",$params); ?>
+    	<input type="hidden" class="hidden_value" name="message_id" value="<?php echo $v['MuzFormMessage']['id']; ?>">
+    	<input type="hidden" class="hidden_value" name="date_key" value="<?php echo $date_key; ?>">
+    	<input type="hidden" class="hidden_value" name="form_id"  value="<?php echo $form['MuzForm']['id']; ?>">
+	</td>
+	<td>
+		<button type="button" class="btn btn-primary btn-sm noteedit">　編集する　</button>
+		<button type="button" class="btn btn-warning btn-sm noteeditsubmit">　更新する　</button>
+		<button type="button" class="btn btn-danger btn-sm notedelete">　削除する　</button>
+		<span class="showhide">
+			
+			<?php
+				$map[0]=(empty($v['MuzFormMessage']['view_flg']))?'btn-default':'btn-success';
+				$map[1]=(empty($v['MuzFormMessage']['view_flg']))?'btn-success':'btn-default';
+				$map_n[0]=(empty($v['MuzFormMessage']['view_flg']))?'notehide':'noteshow';
+				$map_n[1]=(empty($v['MuzFormMessage']['view_flg']))?'noteshow':'notehide';
+			?>
+			<button type="button" class="btn <?php echo $map[0];?> btn-sm <?php echo $map_n[0]; ?>">非表示にする</button>
+			<button type="button" class="btn <?php echo $map[1];?> btn-sm <?php echo $map_n[1]; ?>">　表示する　</button>
+		</span>
+	</td>
+</tr>
+<?php } ?>
+</table>
+
+</div>
+</div>
+</div>
+
+<!-- template -->
+<script id="tempnote" type="text/x-jquery-tmpl">
+<tr>
+  <td>
+    <textarea disabled class="form-control" rows="1">${noteNewTextarea}</textarea>
+    <input type="hidden" class="hidden_value" name="message_id" value="${message_id}">
+    <input type="hidden" class="hidden_value" name="date_key" value="${date_key}">
+    <input type="hidden" class="hidden_value" name="form_id" value="${form_id}">
+  </td>
+  <td>
+  <button type="button" class="btn btn-primary btn-sm noteedit">　編集する　</button>
+  <button type="button" class="btn btn-warning btn-sm noteeditsubmit">　更新する　</button>
+  <button type="button" class="btn btn-danger btn-sm notedelete">　削除する　</button>
+  <span class="showhide">
+  <button type="button" class="btn btn-success btn-sm notehide">非表示にする</button>
+  <button type="button" class="btn btn-default btn-sm noteshow">　表示する　</button>
+  </span>
+  </td>
+</tr>
+</script>
+<!-- /template -->

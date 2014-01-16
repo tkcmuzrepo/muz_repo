@@ -1,0 +1,74 @@
+<div id="main">
+	<div id="main_inner">
+		<div id="form_etc">
+			<div id="homeleft">
+			<h2>広告コード管理</h2>
+				
+				<?php foreach($promotions as $k=>$v){ ?>
+				
+				<div class="advertisingset">
+				<div class="hidden_value" style="display:none;">
+					<?php echo $this->Form->hidden("MuzPromotionSetting.id.{$v['MuzPromotionSetting']['id']}",array('value'=>$v['MuzPromotionSetting']['id'])); ?>
+					<?php echo $this->Form->hidden("MuzPromotionSetting.owner_id.{$v['MuzPromotionSetting']['id']}",array('value'=>$login_user['MuzMasterAccount']['id'])); ?>
+				</div>
+					
+					<div class="advertisingsethead">
+					<p class="advertisingtitle"><?php echo $v['MuzPromotionSetting']['name']; ?></p>
+					<p class="advertisingdelete">削除</p>
+					<p class="advertisingsubmit">保存</p>
+					<p class="advertisingedit">編集</p>
+					<p class="advertisingstate">編集中</p>
+					</div>
+					
+					<?php echo $this->Form->text('MuzPromotionSetting.name',array('id'=>'advertisingtitle',array('value'=>$v['MuzPromotionSetting']['name'])))?>
+					<?php echo $this->Form->text('MuzPromotionSetting.code',array('id'=>'advertisingtextarea',array('value'=>$v['MuzPromotionSetting']['promotion_code'])))?>
+					
+					<textarea cols="" rows="10" placeholder="">
+					google_ad_client = "ca-pub-xxxxxxxxxxxxxxxx";
+					google_ad_slot = "2644871640";
+					google_ad_width = 728;
+					google_ad_height = 90;
+					google_ad_client = "ca-pub-xxxxxxxxxxxxxxxx";
+					google_ad_slot = "2644871640";
+					google_ad_width = 728;
+					google_ad_height = 90;
+					</textarea>
+				</div>
+				<?php } ?>
+				
+			</div>
+			
+			<div id="homeright">
+			<h2>広告コード新規作成</h2>
+			<p>広告コードのタイトル</p>
+			<?php echo $this->Form->text('MuzPromotionSetting.name',array('id'=>'advertisingtitle'))?>
+			
+			<p>広告コード</p>
+			<?php echo $this->Form->text('MuzPromotionSetting.promotion_code',array('id'=>'advertisingtextarea'))?>
+			
+			<input type="submit" value="新規追加" id="advertisingsubmitnew">
+			
+			<div class="hidden_value" style="display:none;">
+				<?php echo $this->Form->hidden("MuzPromotionSetting.owner_id",array("value"=>$login_user['MuzMasterAccount']['id']));?>
+			</div>
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- template -->
+<script id="advertisingsettemp" type="text/x-jquery-tmpl">
+    <div class="advertisingset">
+         <div class="advertisingsethead">
+          <p class="advertisingtitle">${advertisingtitle}</p>
+          <p class="advertisingdelete">削除</p>
+          <p class="advertisingsubmit">保存</p>
+          <p class="advertisingedit">編集</p>
+          <p class="advertisingstate">編集中</p>
+         </div>
+           <textarea cols="" rows="10" placeholder="">${advertisingtextarea}
+          </textarea>
+    </div>
+</script>
+<!-- /template -->

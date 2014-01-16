@@ -1,0 +1,19 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja" dir="ltr" xmlns:og="http://ogp.me/ns#">
+  <head>
+	<base href="<?php echo $base_url; ?>">
+	<meta name="ROBOTS" content="NOINDEX">
+    <title><?php echo $title_for_layout; ?></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
+	<?php echo $this->element("header/{$this->params['controller']}");?>
+	<?php require_once(CSS.DS."{$this->params['action']}_style.php");?>
+ </head>
+<body>
+
+<?php echo $this->element("html_header/{$this->params['controller']}");?>
+<?php echo $content_for_layout;?>
+<?php echo $this->element("html_footer/{$this->params['controller']}");?>
+<?php echo $this->element('sql_dump'); ?>
+
+</body>
+</html>

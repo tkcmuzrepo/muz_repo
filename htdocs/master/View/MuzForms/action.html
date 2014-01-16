@@ -1,0 +1,33 @@
+<script>
+var urlObjOriginal={
+};
+</script>
+
+
+<?php $Form=&$this->Form; ?>
+<?php $isError=!empty($this->data); ?>
+
+<form action="muz_forms/action" method="POST">
+<div id="main">
+<div id="main_inner" class="managementnew">
+	<div id="managementnewform">
+	<h2>フォームの新規作成</h2>
+		<?php if(!empty($isError)){ ?>
+			ERROR<br />
+		<?php } ?>
+		<div id="memanagementnewformleft">
+			<p>フォームのタイトル</p>
+			<?php echo $Form->text('MuzForm.title',array('id'=>'managementnewtitle'));?>
+			<p>フォーム内グループの設定<br/><span>※グループは後から自由に追加や削除?編集する事ができます。<span></p>
+			<?php echo $Form->text('MuzFormGroupSetting.group_title',array('id'=>'managementnewgroup'));?>
+		</div>
+		<div id="memanagementnewright">
+			<p>ページURL</p>
+			https://<?php echo $login_user['MuzClient']['domain']; ?>/<?php echo $Form->text('MuzForm.hash',array('id'=>"managementnewurl"));?>
+			<input type="submit" value="フォームを新規作成する" id="managementnewformsubmit">
+			</P>
+		</div>
+	</div>
+</div>
+</div>
+</form>

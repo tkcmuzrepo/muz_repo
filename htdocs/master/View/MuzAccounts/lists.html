@@ -1,0 +1,166 @@
+<script>
+var urlObjOriginal={
+	'urlUserSubmit':'<?php echo AJAX_USER_ACCOUNT_SAVE; ?>',
+	'urlUserEdit'  :'<?php echo AJAX_USER_ACCOUNT_EDIT; ?>',
+	'urlUserLoginDelete':'<?php echo AJAX_USER_ACCOUNT_DELETE; ?>'
+};
+</script>
+
+<div id="main">
+<div id="main_inner">
+<div id="form_etc">
+
+  <div id="homeleft">
+    <h2>ログイン情報一覧</h2>
+	
+	<?php foreach($users as $k=>$v){ ?>
+	<div class="homeleftbox usereditset parent_<?php echo $k; ?>">
+         <div class="homeleftboxhead">
+	          <p class="homeleftboxheadtitle"><?php echo $v['MuzMasterAccount']['name'];?>
+			  <span class="usercode"><?php echo $v['MuzMasterAccount']['login_id'];?></span></p>
+              <p class="homeleftboxheaddelete useritemedelete">削除</p>
+              <p class="homeleftboxheadubmit useritemesubmit" data="<?php echo $k; ?>">保存</p>
+              <p class="homeleftboxheadubmit useritemeclose">閉じる</p>
+              <p class="homeleftboxheadedit useritemeedit">編集</p>
+              <p class="homeleftboxheadstate useritemestate">編集中</p>
+         </div>
+       <div class="useredititemtablewrap">
+         <table class="useredititemtable">
+         	<tr>
+         		<td>
+         			ユーザー名 : 
+         		</td>
+         		<td>
+					 <?php $params=array('class'=>'itemusernameinput','value'=>$v['MuzMasterAccount']['name']); ?>
+         			 <?php echo $this->Form->text('MuzMasterAccount.name',$params)?>
+         		</td>
+         	</tr>
+         	<tr>
+         		<td>
+         			ユーザーID : 
+         		</td>
+         		<td>
+					 <?php $params=array('class'=>'itemuseridinput','value'=>$v['MuzMasterAccount']['login_id']); ?>
+         			 <?php echo $this->Form->text('MuzMasterAccount.login_id',$params)?>
+         		</td>
+         	</tr>
+         	<tr>
+         		<td>
+         			パスワード : 
+         		</td>
+         		<td>
+					 <?php $params=array('class'=>'itemuserpassinput','value'=>$v['MuzMasterAccount']['login_pass']);?>
+         			 <?php echo $this->Form->text('MuzMasterAccount.login_pass',$params)?>
+         		</td>
+         	</tr>
+         </table>
+		 <input type="hidden" class="hidden_value" name="account_id" value="<?php echo $v['MuzMasterAccount']['id']; ?>">
+	   	 <?php // echo $this->Form->hidden("MuzMasterAccount.id.{$v['MuzMasterAccount']['id']}",array('value'=>$v['MuzMasterAccount']['id'],'class'=>'hidden_value'));?>
+       </div>
+    </div>
+	<?php } ?>
+  
+  
+  </div>
+  
+  <div id="homeright">
+    <h2>ログイン情報の新規作成</h2>
+         <table class="useredititemtable useredititemtableshort">
+         	<tr>
+         		<td>
+         			ユーザー名 : 
+         		</td>
+         		<td>
+					 <?php $params=array('class'=>'itemusernameinput','id'=>'itemusernameinput');?>
+         			 <?php echo $this->Form->text('MuzMasterAccount.name',$params); ?>
+         		</td>
+         	</tr>
+         	<tr>
+         		<td>
+         			ユーザーID : 
+         		</td>
+         		<td>
+					 <?php $params=array('class'=>'itemuseridinput','id'=>'itemuseridinput');?>
+         			 <?php echo $this->Form->text('MuzMasterAccount.login_id',$params); ?>
+         		</td>
+         	</tr>
+         	<tr>
+         		<td class="useredititemtable_long">
+         			パスワード : 
+         		</td>
+         		<td>
+				 	 <?php $params=array('class'=>'itemuserpassinput','id'=>'itemuserpassinput'); ?>
+         			 <?php echo $this->Form->text('MuzMasterAccount.login_pass',$params); ?>
+         		</td>
+         	</tr>
+         	<tr>
+         		<td class="useredititemtable_long">
+         			パスワード(確認用) : 
+         		</td>
+         		<td>
+					 <?php $params=array('class'=>'itemuserpasscommitinput','id'=>'itemuserpasscommitinput'); ?>
+					 <?php echo $this->Form->text('MuzMasterAccount.login_pass_conf',$params); ?>
+         		</td>
+         	</tr>
+          <tr>
+            <td class="useredititemtable_long">マスター権限: </td>
+            <td>
+              <ul class="usereditradio">
+                <li>
+                  <input type="checkbox" name="masetauthority" value="true">マスター権限を作成する
+                </li>
+              </ul>
+            </td>
+          </tr>
+         </table>
+         <center>
+	         <input type="submit" value="ログイン情報を作成する" id="useredcreatnewuser">
+	     </center>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- template -->
+<script id="useredititemtabletnp" type="text/x-jquery-tmpl">
+    <div class="homeleftbox usereditset">
+         <div class="homeleftboxhead">
+	          <p class="homeleftboxheadtitle">${itemusernameinput}</p>
+	          <p class="homeleftboxheaddelete useritemedelete">削除</p>
+	          <p class="homeleftboxheadubmit useritemesubmit">保存</p>
+	          <p class="homeleftboxheadedit useritemeedit">編集</p>
+	          <p class="homeleftboxheadstate useritemestate">編集中</p>
+         </div>
+      <div class="useredititemtablewrap">
+         <table class="useredititemtable">
+         	<tr>
+         		<td>
+         			ユーザー名 : 
+         		</td>
+         		<td>
+         			 <?php echo $this->Form->text('MuzMasterAccount.name',array('class'=>'itemusernameinput','value'=>'${itemusernameinput}'))?>
+         		</td>
+         	</tr>
+         	<tr>
+         		<td>
+         			ユーザーID : 
+         		</td>
+         		<td>
+         			 <?php echo $this->Form->text('MuzMasterAccount.login_id',array('class'=>'itemuseridinput','value'=>'${itemuseridinput}'))?>
+         		</td>
+         	</tr>
+         	<tr>
+         		<td>
+         			パスワード : 
+         		</td>
+         		<td>
+         			 <?php echo $this->Form->text('MuzMasterAccount.login_pass',array('class'=>'itemuserpassinput','value'=>'${itemuserpassinput}'))?>
+         		</td>
+         	</tr>
+         </table>
+		 
+         <input type="hidden" class="hidden_value" name="account_id" value="${account_id}">
+         </div>
+    </div>
+</script>
+<!-- /template -->
